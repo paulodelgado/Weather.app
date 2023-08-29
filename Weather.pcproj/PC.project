@@ -1,0 +1,86 @@
+{
+    APPLICATIONICON = "";
+    "APP_DOCUMENT_BASED" = NO;
+    "APP_TYPE" = GORM;
+    "BUILDER_TARGETS" = (
+	all,
+	install,
+	uninstall,
+	clean,
+	distclean,
+	dist
+    );
+    "BUNDLE_IDENTIFIER" = "";
+    "CLASS_FILES" = (
+	"AppController.m",
+	"LocationWeatherData.m",
+	"WeatherApi.m"
+    );
+    COMPILEROPTIONS = "";
+    CPPOPTIONS = "";
+    "CREATION_DATE" = "2023-08-25 16:05:06 -0700";
+    "DOCU_FILES" = (
+    );
+    FRAMEWORKS = (
+    );
+    "HEADER_FILES" = (
+	"AppController.h",
+	"LocationWeatherData.h",
+	"WeatherApi.h"
+    );
+    IMAGES = (
+    );
+    INSTALLDIR = "$(HOME)/GNUstep";
+    INTERFACES = (
+	"Weather.gorm"
+    );
+    LANGUAGE = English;
+    LIBRARIES = (
+	"gnustep-base",
+	"gnustep-gui"
+    );
+    LINKEROPTIONS = "";
+    "LOCALIZED_RESOURCES" = (
+    );
+    MAININTERFACE = "Weather.gorm";
+    MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    "OBJC_COMPILEROPTIONS" = "";
+    "OTHER_RESOURCES" = (
+    );
+    "OTHER_SOURCES" = (
+	"Weather_main.m"
+    );
+    "PRINCIPAL_CLASS" = NSApplication;
+    "PROJECT_AUTHORS" = (
+	"Paulo Delgado"
+    );
+    "PROJECT_COPYRIGHT" = "Copyright (C) 200x";
+    "PROJECT_COPYRIGHT_DESC" = GPL;
+    "PROJECT_CREATOR" = "Paulo Delgado";
+    "PROJECT_DESCRIPTION" = "A Weather App written with GNUStep";
+    "PROJECT_DOCUMENTTYPES" = (
+    );
+    "PROJECT_GROUP" = "No group avaliable!";
+    "PROJECT_MAINTAINER" = "Paulo Delgado";
+    "PROJECT_NAME" = Weather;
+    "PROJECT_RELEASE" = "0.1";
+    "PROJECT_SUMMARY" = "No summary avaliable!";
+    "PROJECT_TYPE" = Application;
+    "PROJECT_URL" = "";
+    "SEARCH_HEADER_DIRS" = (
+    );
+    "SEARCH_LIB_DIRS" = (
+    );
+    SUBPROJECTS = (
+    );
+    "SUPPORTING_FILES" = (
+	"GNUmakefile.preamble",
+	GNUmakefile,
+	"GNUmakefile.postamble",
+	"WeatherInfo.plist"
+    );
+    "USER_LANGUAGES" = (
+	AmericanEnglish,
+	English
+    );
+}
