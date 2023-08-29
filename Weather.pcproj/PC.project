@@ -37,7 +37,8 @@
     LANGUAGE = English;
     LIBRARIES = (
 	"gnustep-base",
-	"gnustep-gui"
+	"gnustep-gui",
+	WebServices
     );
     LINKEROPTIONS = "";
     "LOCALIZED_RESOURCES" = (
@@ -70,6 +71,7 @@
     "SEARCH_HEADER_DIRS" = (
     );
     "SEARCH_LIB_DIRS" = (
+	"/usr/local/lib"
     );
     SUBPROJECTS = (
     );

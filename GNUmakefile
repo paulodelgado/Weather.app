@@ -29,6 +29,11 @@ Weather_APPLICATION_ICON =
 
 
 #
+# Libraries
+#
+Weather_LIBRARIES_DEPEND_UPON += -lWebServices 
+
+#
 # Resource files
 #
 Weather_RESOURCE_FILES = \
