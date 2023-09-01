@@ -25,7 +25,9 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 #import "ConfigService.h"
 
 @implementation ConfigService
-NSDictionary *dict;
+NSDictionary *configDictionary;
+NSArray *locationsArr;
+
 static NSString *relativeDirectoryPath = @"/.config/Weather.app/";
 static NSString *configFileName = @"config.plist";
 
@@ -34,9 +36,7 @@ static NSString *configFileName = @"config.plist";
   self = [super init];
   if(self) {
     [self createConfigFileIfMissing];
-    NSDictionary *myDict = [NSDictionary dictionaryWithContentsOfFile:[self defaultConfigFilePath]];
-    [self setDict:myDict];
-    NSLog(@"Loaded dictionary: %@:", dict);
+    [self setupDictionary];
   }
 
   return self;
@@ -44,7 +44,7 @@ static NSString *configFileName = @"config.plist";
 
 - (NSString *) fetchAuthToken {
   NSLog(@"ConfigService#fetchAuthToken");
-  return [[self dict] valueForKey:@"api_key"];
+  return [configDictionary valueForKey:@"api_key"];
 }
 
 - (NSDictionary *) buildDefaultConfig {
@@ -99,21 +99,23 @@ static NSString *configFileName = @"config.plist";
   return fullConfigFilePath;
 }
 
-- (NSDictionary *) dict
-{
-  return dict;
+- (void) setupDictionary {
+  configDictionary = [NSDictionary dictionaryWithContentsOfFile:[self defaultConfigFilePath]];
+  locationsArr = [configDictionary valueForKey:@"locations"];
 }
 
-- (void) setDict:(NSDictionary *) newDict
-{
-  dict = newDict;
+- (NSString *) locationAtIndex:(int) index {
+  NSLog(@"ConfigService#locationAtIndex with index: (%d)", index);
+  NSLog(@"locationsArr count: %d", [locationsArr count]);
+  if(index +1 > [locationsArr count]) {
+    NSLog(@"index out of bounds");
+    return @"";
+  }
+  return [locationsArr objectAtIndex:index];
 }
 
-- (NSString *) selectedLocation
-{
-  NSArray *locations = [[self dict] valueForKey:@"locations"];
-  NSString *firstLocation = [locations objectAtIndex:0];
-  return firstLocation;
+- (int) locationCount {
+  return [locationsArr count];
 }
 
 @end

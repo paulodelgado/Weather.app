@@ -2,12 +2,16 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     AppController = {
 	Actions = (
-	    "showPrefPanel:"
+	    "showPrefPanel:",
+	    "showNextLocation:",
+	    "showPreviousLocation:"
 	);
 	Outlets = (
 	    temperatureLabel,
 	    locationLabel,
-	    imageView
+	    imageView,
+	    nextLocationButton,
+	    previousLocationButton
 	);
 	Super = NSObject;
     };
@@ -28,7 +32,9 @@
     FirstResponder = {
 	Actions = (
 	    "orderFrontFontPanel:",
-	    "showPrefPanel:"
+	    "showNextLocation:",
+	    "showPrefPanel:",
+	    "showPreviousLocation:"
 	);
 	Super = NSObject;
     };

@@ -29,16 +29,21 @@
 
 @interface ConfigService : NSObject
 {
-NSDictionary *dict;
+  NSDictionary *configDictionary;
+  NSArray *locationsArr;
 }
-@property (assign) NSDictionary *dict;
+
+- (void) setupDictionary;
+- (NSDictionary *) buildDefaultConfig;
 
 - (NSString *) defaultConfigFilePath;
 - (NSString *) defaultConfigDirectoryPath;
-- (NSDictionary *) buildDefaultConfig;
+
 - (void) createConfigFileIfMissing;
+
 - (NSString *) fetchAuthToken;
-- (NSString *) selectedLocation;
+- (NSString *) locationAtIndex:(int) index;
+- (int) locationCount;
 
 @end
 

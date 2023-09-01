@@ -15,30 +15,31 @@
 #import "ConfigService.h"
 #import "PreferencesPaneController.h"
 
-@interface AppController : NSObject
-{
-id temperatureLabel;
-id locationLabel;
-id imageView;
-ConfigService *configService;
+@interface AppController : NSObject {
+  id temperatureLabel;
+  id locationLabel;
+  id imageView;
+  id nextLocationButton;
+  id previousLocationButton;
+  ConfigService *configService;
+  WeatherApi *api;
 }
-
-@property (assign) ConfigService *configService;
-
 
 + (void)  initialize;
 
 - (id) init;
 - (void) dealloc;
-
 - (void) awakeFromNib;
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif;
 - (BOOL) applicationShouldTerminate: (id)sender;
 - (void) applicationWillTerminate: (NSNotification *)aNotif;
-- (BOOL) application: (NSApplication *)application
-  openFile: (NSString *)fileName;
-
+- (BOOL) application: (NSApplication *)application openFile: (NSString *)fileName;
 - (void) showPrefPanel: (id)sender;
+- (void) showNextLocation: (id)sender;
+- (void) showPreviousLocation: (id)sender;
+- (void) setupWeatherApi;
+- (void) setupConfigService;
+- (void) fetchWeatherForCurrentIndex;
 
 @end
 

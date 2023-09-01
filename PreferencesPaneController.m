@@ -33,4 +33,21 @@ id selectedUnits;
   NSLog(@"PreferencesPaneController#windowDidLoad");
 }
 
+- (void) awakeFromNib
+{
+  NSLog(@"PreferencesPaneControllerawakeFromNib");
+
+
+  /* [locationLabel setStringValue:[lwd locationName]]; */
+  /* [temperatureLabel setStringValue:[lwd temperature]]; */
+  
+  /* NSString *iconURLString = [lwd icon]; */
+  /* NSLog(@"icon url: %@", iconURLString); */
+  
+  /* NSURL *iconURL = [NSURL URLWithString:iconURLString]; */
+  
+  /* NSImage *icon = [[NSImage alloc] initWithContentsOfURL:iconURL]; */
+  /* [imageView setImage:icon]; */
+}
+
 @end

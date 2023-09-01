@@ -12,47 +12,62 @@ Application Controller
 
 @implementation AppController
 
-LocationWeatherData *lwd;
+
 id temperatureLabel;
 id locationLabel;
 id imageView;
+id nextLocationButton;
+id previousLocationButton;
+
+int currentLocationIndex = 0;
+int savedLocationsCount;
+
 ConfigService *configService;
+WeatherApi *api;
 
-
-+ (void) initialize
-{
++ (void) initialize {
   NSLog(@"AppController#initialize");
   NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
-
   [[NSUserDefaults standardUserDefaults] registerDefaults: defaults];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (id) init
-{
+- (id) init {
   NSLog(@"AppController#init");
   if ((self = [super init]))
   {
-    [locationLabel setStringValue:@"Hello World"];
   }
   return self;
 }
 
-- (void) dealloc
-{
+- (void) dealloc {
   [super dealloc];
 }
 
-- (void) awakeFromNib
-{
+- (void) awakeFromNib {
   NSLog(@"awakeFromNib");
+  [self setupConfigService];
+  [self setupWeatherApi];
+  [self fetchWeatherForCurrentIndex];
+}
+
+- (void) setupWeatherApi {
+  api = [[WeatherApi alloc] initWithToken:[configService fetchAuthToken]];
+}
+
+- (void) setupConfigService {
   configService = [[ConfigService alloc] init];
+  savedLocationsCount = [configService locationCount];
+}
 
-  NSLog(@"We have a configService: %@", configService);
-
-  WeatherApi *api = [[WeatherApi alloc] initWithToken:[configService fetchAuthToken]];
-  NSString *defaultLocation = [configService selectedLocation];
-  LocationWeatherData *lwd = [api fetchWeatherDataFor:defaultLocation];
+- (void) fetchWeatherForCurrentIndex {
+  NSLog(@"AppController#fetchWeatherForCurrentIndex");
+  
+  NSLog(@"configService: %@", configService);
+  
+  NSString *savedLocationName = [configService locationAtIndex:currentLocationIndex];
+  NSLog(@"fetching weather for location (%@)", savedLocationName);
+  LocationWeatherData *lwd = [api fetchWeatherDataFor:savedLocationName];
 
   [locationLabel setStringValue:[lwd locationName]];
   [temperatureLabel setStringValue:[lwd temperature]];
@@ -66,41 +81,46 @@ ConfigService *configService;
   [imageView setImage:icon];
 }
 
-- (void) applicationDidFinishLaunching: (NSNotification *)aNotif
-{
+- (void) applicationDidFinishLaunching: (NSNotification *)aNotif {
   NSLog(@"applicationDidFinishLaunching");
 }
 
-- (BOOL) applicationShouldTerminate: (id)sender
-{
+- (BOOL) applicationShouldTerminate: (id)sender {
   return YES;
 }
 
-- (void) applicationWillTerminate: (NSNotification *)aNotif
-{
+- (void) applicationWillTerminate: (NSNotification *)aNotif {
 }
 
 - (BOOL) application: (NSApplication *)application
-            openFile: (NSString *)fileName
-{
+            openFile: (NSString *)fileName {
   return NO;
 }
 
-- (void) showPrefPanel: (id)sender
-{
+- (void) showPrefPanel: (id)sender {
   NSLog(@"Something triggered showPrefPanel!");
   PreferencesPaneController *prefPaneController = [[PreferencesPaneController alloc] initWithWindowNibName:@"yermom"];
   [prefPaneController showWindow:sender];
 }
 
-- (ConfigService *) configService
-{
-  return configService;
+
+- (void) showNextLocation: (id)sender {
+  NSLog(@"AppController#showNextLocation");
+  if(currentLocationIndex + 1 >= savedLocationsCount) {
+    return;
+  } else {
+    currentLocationIndex++;
+    [self fetchWeatherForCurrentIndex];
+  }
 }
 
-- (void) setConfigService:(ConfigService *) newService
-{
-  configService = newService;
+- (void) showPreviousLocation: (id)sender {
+  NSLog(@"AppController#showPreviousLocation");
+  if(currentLocationIndex == 0) {
+    return;
+  } else {
+    currentLocationIndex--;
+    [self fetchWeatherForCurrentIndex];
+  }
 }
-
 @end
