@@ -38,6 +38,7 @@ Weather_LIBRARIES_DEPEND_UPON += -lWebServices
 #
 Weather_RESOURCE_FILES = \
 Resources/Weather.gorm \
+Resources/sunny.jpeg 
 
 
 #
@@ -46,7 +47,9 @@ Resources/Weather.gorm \
 Weather_HEADER_FILES = \
 AppController.h \
 LocationWeatherData.h \
-WeatherApi.h
+WeatherApi.h \
+ConfigService.h \
+PreferencesPaneController.h
 
 #
 # Objective-C Class files
@@ -54,7 +57,9 @@ WeatherApi.h
 Weather_OBJC_FILES = \
 AppController.m \
 LocationWeatherData.m \
-WeatherApi.m
+WeatherApi.m \
+ConfigService.m \
+PreferencesPaneController.m
 
 #
 # Other sources

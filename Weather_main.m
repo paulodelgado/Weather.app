@@ -19,9 +19,6 @@ int main(int argc, const char *argv[])
   [NSApplication sharedApplication];
   [NSApp setDelegate:delegate];
 
-  /*
-
-  */
   RELEASE(pool);
 
   return NSApplicationMain (argc, argv);

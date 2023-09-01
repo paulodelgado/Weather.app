@@ -14,7 +14,9 @@
     "CLASS_FILES" = (
 	"AppController.m",
 	"LocationWeatherData.m",
-	"WeatherApi.m"
+	"WeatherApi.m",
+	"ConfigService.m",
+	"PreferencesPaneController.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -26,9 +28,12 @@
     "HEADER_FILES" = (
 	"AppController.h",
 	"LocationWeatherData.h",
-	"WeatherApi.h"
+	"WeatherApi.h",
+	"ConfigService.h",
+	"PreferencesPaneController.h"
     );
     IMAGES = (
+	"sunny.jpeg"
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
@@ -58,7 +63,7 @@
     "PROJECT_COPYRIGHT" = "Copyright (C) 200x";
     "PROJECT_COPYRIGHT_DESC" = GPL;
     "PROJECT_CREATOR" = "Paulo Delgado";
-    "PROJECT_DESCRIPTION" = "A Weather App written with GNUStep";
+    "PROJECT_DESCRIPTION" = "A GNUStep Weather App";
     "PROJECT_DOCUMENTTYPES" = (
     );
     "PROJECT_GROUP" = "No group avaliable!";

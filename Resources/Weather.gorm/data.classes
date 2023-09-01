@@ -5,6 +5,23 @@
 	    "showPrefPanel:"
 	);
 	Outlets = (
+	    temperatureLabel,
+	    locationLabel,
+	    imageView
+	);
+	Super = NSObject;
+    };
+    ConfigService = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    ConfigWindowController = {
+	Actions = (
+	);
+	Outlets = (
 	);
 	Super = NSObject;
     };
@@ -21,6 +38,29 @@
 	Outlets = (
 	);
 	Super = NSObject;
+    };
+    NewClass = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    NewClass1 = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+    PreferencesPaneController = {
+	Actions = (
+	);
+	Outlets = (
+	    tokenTextField,
+	    selectedUnits
+	);
+	Super = NSWindowController;
     };
     WeatherApi = {
 	Actions = (

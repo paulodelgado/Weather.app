@@ -1,42 +1,40 @@
 /*
-   Project: Weather
+Project: Weather
 
-   Author: Paulo Delgado
+Author: Paulo Delgado
 
-   Created: 2023-08-25 16:05:06 -0700 by paulo
+Created: 2023-08-25 16:05:06 -0700 by paulo
 
-   Application Controller
+Application Controller
 */
 
 #import "AppController.h"
-#import "LocationWeatherData.h"
 
 @implementation AppController
 
 LocationWeatherData *lwd;
+id temperatureLabel;
+id locationLabel;
+id imageView;
+ConfigService *configService;
+
 
 + (void) initialize
 {
+  NSLog(@"AppController#initialize");
   NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
 
-  /*
-   * Register your app's defaults here by adding objects to the
-   * dictionary, eg
-   *
-   * [defaults setObject:anObject forKey:keyForThatObject];
-   *
-   */
-  
   [[NSUserDefaults standardUserDefaults] registerDefaults: defaults];
   [[NSUserDefaults standardUserDefaults] synchronize];
-  
 }
 
 - (id) init
 {
+  NSLog(@"AppController#init");
   if ((self = [super init]))
-    {
-    }
+  {
+    [locationLabel setStringValue:@"Hello World"];
+  }
   return self;
 }
 
@@ -47,16 +45,30 @@ LocationWeatherData *lwd;
 
 - (void) awakeFromNib
 {
+  NSLog(@"awakeFromNib");
+  configService = [[ConfigService alloc] init];
+
+  NSLog(@"We have a configService: %@", configService);
+
+  WeatherApi *api = [[WeatherApi alloc] initWithToken:[configService fetchAuthToken]];
+  NSString *defaultLocation = [configService selectedLocation];
+  LocationWeatherData *lwd = [api fetchWeatherDataFor:defaultLocation];
+
+  [locationLabel setStringValue:[lwd locationName]];
+  [temperatureLabel setStringValue:[lwd temperature]];
+  
+  NSString *iconURLString = [lwd icon];
+  NSLog(@"icon url: %@", iconURLString);
+  
+  NSURL *iconURL = [NSURL URLWithString:iconURLString];
+  
+  NSImage *icon = [[NSImage alloc] initWithContentsOfURL:iconURL];
+  [imageView setImage:icon];
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif
 {
-  NSLog(@"Fetching Config");
-  NSString *authToken = @"foo";
-  WeatherApi *api = [[WeatherApi alloc] initWithToken:authToken];
-  NSString *defaultLocation = @"Cupertino, CA";
-  LocationWeatherData *lwd = [api fetchWeatherDataFor:defaultLocation];
-  NSLog(@"Temperature:",  [lwd temperature]);
+  NSLog(@"applicationDidFinishLaunching");
 }
 
 - (BOOL) applicationShouldTerminate: (id)sender
@@ -69,13 +81,26 @@ LocationWeatherData *lwd;
 }
 
 - (BOOL) application: (NSApplication *)application
-      openFile: (NSString *)fileName
+            openFile: (NSString *)fileName
 {
   return NO;
 }
 
 - (void) showPrefPanel: (id)sender
 {
+  NSLog(@"Something triggered showPrefPanel!");
+  PreferencesPaneController *prefPaneController = [[PreferencesPaneController alloc] initWithWindowNibName:@"yermom"];
+  [prefPaneController showWindow:sender];
+}
+
+- (ConfigService *) configService
+{
+  return configService;
+}
+
+- (void) setConfigService:(ConfigService *) newService
+{
+  configService = newService;
 }
 
 @end
