@@ -47,7 +47,7 @@ NSDictionary *location;
   NSString *temperatureString = [current valueForKey:@"temp_f"];
   NSInteger temperatureInteger = [temperatureString integerValue];
   
-  return [NSString stringWithFormat:@"%d", temperatureInteger];
+  return [NSString stringWithFormat:@"%d°", temperatureInteger];
 }
 
 - (NSDictionary *) current

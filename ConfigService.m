@@ -101,16 +101,12 @@ static NSString *configFileName = @"config.plist";
 
 - (void) setupDictionary {
   configDictionary = [NSDictionary dictionaryWithContentsOfFile:[self defaultConfigFilePath]];
+  [configDictionary retain];
   locationsArr = [configDictionary valueForKey:@"locations"];
+  [locationsArr retain];
 }
 
 - (NSString *) locationAtIndex:(int) index {
-  NSLog(@"ConfigService#locationAtIndex with index: (%d)", index);
-  NSLog(@"locationsArr count: %d", [locationsArr count]);
-  if(index +1 > [locationsArr count]) {
-    NSLog(@"index out of bounds");
-    return @"";
-  }
   return [locationsArr objectAtIndex:index];
 }
 
