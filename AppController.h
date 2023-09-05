@@ -13,7 +13,8 @@
 #import "LocationWeatherData.h"
 #import "WeatherApi.h"
 #import "ConfigService.h"
-#import "PreferencesPaneController.h"
+#import "PreferencesController.h"
+
 
 @interface AppController : NSObject {
   id temperatureLabel;
@@ -23,6 +24,10 @@
   id previousLocationButton;
   ConfigService *configService;
   WeatherApi *api;
+  PreferencesController *preferencesController;
+  
+  int savedLocationsCount;
+  int currentLocationIndex;
 }
 
 + (void)  initialize;
@@ -34,7 +39,7 @@
 - (BOOL) applicationShouldTerminate: (id)sender;
 - (void) applicationWillTerminate: (NSNotification *)aNotif;
 - (BOOL) application: (NSApplication *)application openFile: (NSString *)fileName;
-- (void) showPrefPanel: (id)sender;
+- (IBAction) showPrefPanel: (id)sender;
 - (void) showNextLocation: (id)sender;
 - (void) showPreviousLocation: (id)sender;
 - (void) setupWeatherApi;

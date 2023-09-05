@@ -16,7 +16,7 @@
 	"LocationWeatherData.m",
 	"WeatherApi.m",
 	"ConfigService.m",
-	"PreferencesPaneController.m"
+	"PreferencesController.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -30,14 +30,15 @@
 	"LocationWeatherData.h",
 	"WeatherApi.h",
 	"ConfigService.h",
-	"PreferencesPaneController.h"
+	"PreferencesController.h"
     );
     IMAGES = (
-	"sunny.jpeg"
+	"weatherapi_logo.png"
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
-	"Weather.gorm"
+	"Weather.gorm",
+	"Preferences.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (

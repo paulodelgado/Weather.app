@@ -27,12 +27,21 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "ConfigService.h"
 
-@interface PreferencesPaneController : NSWindowController
-{
-id tokenTextField;
-id selectedUnits;
+@interface PreferencesController : NSWindowController {
+  id tokenTextField;
+  id useMetricSystem;
+  id window;
+
+  ConfigService *configService;
 }
+
+- (void) setConfigService:(ConfigService *) service;
+- (IBAction) setApiToken:(id) sender;
+- (IBAction) setUseMetricSystem:(id) sender;
+- (IBAction) addLocation:(id) sender;
+- (IBAction) removeLocation:(id) sender;
 
 @end
 

@@ -59,6 +59,15 @@
 	);
 	Super = NSObject;
     };
+    PreferencesController = {
+	Actions = (
+	);
+	Outlets = (
+	    tokenTextField,
+	    selectedUnits
+	);
+	Super = NSWindowController;
+    };
     PreferencesPaneController = {
 	Actions = (
 	);

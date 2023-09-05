@@ -22,32 +22,40 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#import "PreferencesPaneController.h"
+#import "PreferencesController.h"
 
-@implementation PreferencesPaneController
-id tokenTextField;
-id selectedUnits;
+@implementation PreferencesController
 
-- (void) windowDidLoad
-{
-  NSLog(@"PreferencesPaneController#windowDidLoad");
+- (void) awakeFromNib {
+  NSLog(@"PreferencesController#awakeFromNib");
+  NSLog(@"in awakeFromNib self = %@", self);
+  NSString *authToken = [configService fetchAuthToken];
+  NSLog(@"setting tokenTextField with: %@", authToken);
+  [tokenTextField setObjectValue:authToken];
 }
 
-- (void) awakeFromNib
-{
-  NSLog(@"PreferencesPaneControllerawakeFromNib");
-
-
-  /* [locationLabel setStringValue:[lwd locationName]]; */
-  /* [temperatureLabel setStringValue:[lwd temperature]]; */
-  
-  /* NSString *iconURLString = [lwd icon]; */
-  /* NSLog(@"icon url: %@", iconURLString); */
-  
-  /* NSURL *iconURL = [NSURL URLWithString:iconURLString]; */
-  
-  /* NSImage *icon = [[NSImage alloc] initWithContentsOfURL:iconURL]; */
-  /* [imageView setImage:icon]; */
+- (void) setConfigService:(ConfigService *) service {
+  NSLog(@"in setConfigService => self: %@", self);
+  configService = service;
 }
 
+- (IBAction) setApiToken:(id) sender {
+  NSLog(@"PreferencesController#setApiToken");
+
+}
+
+- (IBAction) setUseMetricSystem:(id) sender {
+  NSLog(@"PreferencesController#setUseMetricSystem");
+
+}
+
+- (IBAction) addLocation:(id) sender {
+  NSLog(@"PreferencesController#addLocation");
+
+}
+
+- (IBAction) removeLocation:(id) sender {
+  NSLog(@"PreferencesController#removeLocation");
+
+}
 @end

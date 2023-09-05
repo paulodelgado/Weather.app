@@ -1,25 +1,30 @@
 /* 
-   Project: Weather.app
+   Project: Weather
+
    Author: Paulo Delgado
-   Created: 2023-08-25 16:05:06 -0700 by paulo
+
+   Created: 2023-09-04 21:44:34 -0700 by paulo
 */
 
 #import <AppKit/AppKit.h>
-#import "AppController.h"
 
-int main(int argc, const char *argv[])
+int 
+main(int argc, const char *argv[])
 {
-
-  NSAutoreleasePool *pool;
-  AppController *delegate;
-
-  pool = [[NSAutoreleasePool alloc] init];
-  delegate = [[AppController alloc] init];
-
+// Uncomment if your application is Renaissance application
+/*  CREATE_AUTORELEASE_POOL (pool);
   [NSApplication sharedApplication];
-  [NSApp setDelegate:delegate];
+  [NSApp setDelegate: [AppController new]];
 
-  RELEASE(pool);
+  #ifdef GNUSTEP
+    [NSBundle loadGSMarkupNamed: @"MainMenu-GNUstep"  owner: [NSApp delegate]];
+  #else
+    [NSBundle loadGSMarkupNamed: @"MainMenu-OSX"  owner: [NSApp delegate]];
+  #endif
+   
+  RELEASE (pool);
+*/
 
   return NSApplicationMain (argc, argv);
 }
+

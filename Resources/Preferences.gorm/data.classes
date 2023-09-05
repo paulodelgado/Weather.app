@@ -1,0 +1,44 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "showNextLocation:",
+	    "showPreviousLocation:"
+	);
+	Outlets = (
+	    temperatureLabel,
+	    locationLabel,
+	    imageView,
+	    nextLocationButton,
+	    previousLocationButton
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "addLocation:",
+	    "removeLocation:",
+	    "setApiToken:",
+	    "setUseMetricSystem:",
+	    "setuseMetricSystem:",
+	    "showNextLocation:",
+	    "showPrefPanel:",
+	    "showPreviousLocation:"
+	);
+	Super = NSObject;
+    };
+    PreferencesController = {
+	Actions = (
+	    "setApiToken:",
+	    "setUseMetricSystem:",
+	    "addLocation:",
+	    "removeLocation:"
+	);
+	Outlets = (
+	    tokenTextField,
+	    useMetricSystem
+	);
+	Super = NSWindowController;
+    };
+}

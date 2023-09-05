@@ -12,18 +12,7 @@ Application Controller
 
 @implementation AppController
 
-
-id temperatureLabel;
-id locationLabel;
-id imageView;
-id nextLocationButton;
-id previousLocationButton;
-
 int currentLocationIndex = 0;
-int savedLocationsCount;
-
-ConfigService *configService;
-WeatherApi *api;
 
 + (void) initialize {
   NSLog(@"AppController#initialize");
@@ -36,6 +25,7 @@ WeatherApi *api;
   NSLog(@"AppController#init");
   if ((self = [super init]))
   {
+    NSLog(@"in AppController#init self = %@", self);
   }
   return self;
 }
@@ -46,6 +36,7 @@ WeatherApi *api;
 
 - (void) awakeFromNib {
   NSLog(@"awakeFromNib");
+  currentLocationIndex = 0;
   [self setupConfigService];
   [self setupWeatherApi];
   [self fetchWeatherForCurrentIndex];
@@ -57,6 +48,7 @@ WeatherApi *api;
 
 - (void) setupConfigService {
   configService = [[ConfigService alloc] init];
+  [configService retain];
   savedLocationsCount = [configService locationCount];
 }
 
@@ -97,10 +89,13 @@ WeatherApi *api;
   return NO;
 }
 
-- (void) showPrefPanel: (id)sender {
+- (IBAction) showPrefPanel: (id)sender {
   NSLog(@"Something triggered showPrefPanel!");
-  PreferencesPaneController *prefPaneController = [[PreferencesPaneController alloc] initWithWindowNibName:@"yermom"];
-  [prefPaneController showWindow:sender];
+  if(!preferencesController) {
+    preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"Preferences"];
+    [preferencesController setConfigService:configService];
+  }
+  [preferencesController showWindow:nil];
 }
 
 
