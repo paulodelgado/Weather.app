@@ -9,6 +9,10 @@
 	Outlets = (
 	    temperatureLabel,
 	    locationLabel,
+	    windSpeedLabel,
+	    precipitationLabel,
+	    pressureLabel,
+	    humidityLabel,
 	    imageView,
 	    nextLocationButton,
 	    previousLocationButton

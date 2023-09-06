@@ -22,17 +22,27 @@ License along with this library; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#import "ConfigService.h"
+#import "ConfigManager.h"
 
-@implementation ConfigService
-NSDictionary *configDictionary;
-NSArray *locationsArr;
+@implementation ConfigManager
 
 static NSString *relativeDirectoryPath = @"/.config/Weather.app/";
 static NSString *configFileName = @"config.plist";
+static ConfigManager *defaultManager;
+
++ (void) initialize {
+  static BOOL isInitialized = NO;
+  if(!isInitialized) {
+    defaultManager = [[ConfigManager alloc] init];
+    isInitialized = YES;
+  }
+}
+
++ (ConfigManager *) defaultManager {
+  return defaultManager;
+}
 
 - (id) init {
-  NSLog(@"ConfigService#init");
   self = [super init];
   if(self) {
     [self createConfigFileIfMissing];
@@ -43,12 +53,12 @@ static NSString *configFileName = @"config.plist";
 }
 
 - (NSString *) fetchAuthToken {
-  NSLog(@"ConfigService#fetchAuthToken");
+  NSLog(@"ConfigManager#fetchAuthToken");
   return [configDictionary valueForKey:@"api_key"];
 }
 
 - (NSDictionary *) buildDefaultConfig {
-  NSLog(@"ConfigService#buildDefaultConfig");
+  NSLog(@"ConfigManager#buildDefaultConfig");
 
 
   id locs[] = {@"Cupertino, CA", @"New York, NY"};
@@ -59,7 +69,6 @@ static NSString *configFileName = @"config.plist";
 }
 
 - (void) createConfigFileIfMissing {
-  NSLog(@"ConfigService#createConfigFileIfMissing");
 
   NSString *filePath = [self defaultConfigFilePath];
 
@@ -69,23 +78,18 @@ static NSString *configFileName = @"config.plist";
     NSDictionary *newConfig = [self buildDefaultConfig];
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool dirExists = [fileManager createDirectoryAtPath:[self defaultConfigDirectoryPath]
+    
+    [fileManager createDirectoryAtPath:[self defaultConfigDirectoryPath]
                             withIntermediateDirectories:true
                                              attributes: nil
                                                   error: nil
     ];
-    NSLog(@"dirExists: %d", dirExists);
 
-    bool fileCreated = [fileManager createFileAtPath:filePath
+    [fileManager createFileAtPath:filePath
                                             contents: nil
                                           attributes: nil
     ];
-    if(!fileCreated) {
-    }
-    bool successWrite = [newConfig writeToFile:filePath atomically:false];
-    if(!successWrite) {
-      NSLog(@"dammit");
-    }
+    [newConfig writeToFile:filePath atomically:false];
   }
 }
 
@@ -114,4 +118,25 @@ static NSString *configFileName = @"config.plist";
   return [locationsArr count];
 }
 
+- (void) saveNewConfig:(NSDictionary *) newConfig {
+  [newConfig writeToFile:[self defaultConfigFilePath] atomically:false];
+  [self setupDictionary];
+}
+
+- (void) addLocation:(NSString *) newLocation {
+  NSLog(@"ConfigManager#addLocation");
+  NSLog(@"locationsArr before: %@", locationsArr);
+  [locationsArr addObject:newLocation];
+  NSLog(@"locationsArr after: %@", locationsArr);
+}
+
+- (void) removeLocationAt:(NSInteger) index {
+  [locationsArr removeObjectAtIndex:index];
+}
+
+- (void) setLocationName:(id) name atIndex:(NSInteger )index {
+  [locationsArr replaceObjectAtIndex:index withObject:name];
+}
+
+ 
 @end

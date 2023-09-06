@@ -39,7 +39,13 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 - (id) initWithDictionary:(NSDictionary *) dict;
 - (NSString *) temperature;
 - (NSString *) locationName;
-- (NSString *) icon;
+- (NSString *) conditionIcon;
+
+- (NSString *) windSpeed;
+- (NSString *) precipitation;
+- (NSString *) pressure;
+- (NSString *) humidity;
+
 
 @end
 

@@ -32,7 +32,6 @@
 
 @interface WeatherApi : NSObject
 {
-  GWSService *service;
   NSString *authToken;
 }
 

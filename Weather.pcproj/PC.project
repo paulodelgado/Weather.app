@@ -1,5 +1,5 @@
 {
-    APPLICATIONICON = "";
+    APPLICATIONICON = "icon.png";
     "APP_DOCUMENT_BASED" = NO;
     "APP_TYPE" = GORM;
     "BUILDER_TARGETS" = (
@@ -15,7 +15,7 @@
 	"AppController.m",
 	"LocationWeatherData.m",
 	"WeatherApi.m",
-	"ConfigService.m",
+	"ConfigManager.m",
 	"PreferencesController.m"
     );
     COMPILEROPTIONS = "";
@@ -29,11 +29,13 @@
 	"AppController.h",
 	"LocationWeatherData.h",
 	"WeatherApi.h",
-	"ConfigService.h",
+	"ConfigManager.h",
 	"PreferencesController.h"
     );
     IMAGES = (
-	"weatherapi_logo.png"
+	"weatherapi_logo.png",
+	"icon.png",
+	"icon.tiff"
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (

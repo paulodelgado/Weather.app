@@ -27,21 +27,23 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import "ConfigService.h"
+#import "ConfigManager.h"
 
-@interface PreferencesController : NSWindowController {
+@interface PreferencesController : NSWindowController <NSTableViewDataSource> {
   id tokenTextField;
   id useMetricSystem;
   id window;
-
-  ConfigService *configService;
+  
+  NSMutableArray *locationsArr;
+  IBOutlet NSTableView *locationsTableView;
 }
 
-- (void) setConfigService:(ConfigService *) service;
 - (IBAction) setApiToken:(id) sender;
 - (IBAction) setUseMetricSystem:(id) sender;
 - (IBAction) addLocation:(id) sender;
 - (IBAction) removeLocation:(id) sender;
+
+
 
 @end
 

@@ -29,14 +29,9 @@
 - (void) awakeFromNib {
   NSLog(@"PreferencesController#awakeFromNib");
   NSLog(@"in awakeFromNib self = %@", self);
-  NSString *authToken = [configService fetchAuthToken];
+  NSString *authToken = [[ConfigManager defaultManager] fetchAuthToken];
   NSLog(@"setting tokenTextField with: %@", authToken);
   [tokenTextField setObjectValue:authToken];
-}
-
-- (void) setConfigService:(ConfigService *) service {
-  NSLog(@"in setConfigService => self: %@", self);
-  configService = service;
 }
 
 - (IBAction) setApiToken:(id) sender {
@@ -51,11 +46,34 @@
 
 - (IBAction) addLocation:(id) sender {
   NSLog(@"PreferencesController#addLocation");
-
+  [[ConfigManager defaultManager] addLocation:@""];
+  [locationsTableView reloadData];
 }
 
 - (IBAction) removeLocation:(id) sender {
   NSLog(@"PreferencesController#removeLocation");
-
+  NSInteger row = [locationsTableView selectedRow];
+  if(row != -1) {
+    [[ConfigManager defaultManager] removeLocationAt:row];
+    [locationsTableView reloadData];
+  }
 }
+
+- (NSInteger) numberOfRowsInTableView:(NSTableView *) t  {
+  return [[ConfigManager defaultManager] locationCount];
+}
+
+- (id)tableView: (NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *) column
+      row:(NSInteger) row {
+  NSLog(@"in objectForValueForTableColumn with row: %d and column with identifier: %@", row, [column identifier]);
+  return [[ConfigManager defaultManager] locationAtIndex:row];
+}
+
+- (void)tableView: (NSTableView *)tableView setObjectValue:(id) object
+      forTableColumn:(NSTableColumn *) column 
+      row:(NSInteger) row {
+    NSLog(@"in setObjectForValueForTableColumn with row: %d and column with identifier: %@ and newValue: %@", row, [column identifier], object);
+    [[ConfigManager defaultManager] setLocationName:object atIndex:row]; 
+}
+
 @end

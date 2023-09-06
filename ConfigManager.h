@@ -22,20 +22,22 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#ifndef _CONFIGSERVICE_H_
-#define _CONFIGSERVICE_H_
+#ifndef _ConfigManager_H_
+#define _ConfigManager_H_
 
 #import <Foundation/Foundation.h>
 
-@interface ConfigService : NSObject
+@interface ConfigManager : NSObject
 {
   NSDictionary *configDictionary;
-  NSArray *locationsArr;
+  NSMutableArray *locationsArr;
 }
 
-- (void) setupDictionary;
-- (NSDictionary *) buildDefaultConfig;
++ (ConfigManager *) defaultManager;
 
+- (void) setupDictionary;
+- (void) saveNewConfig:(NSDictionary *) newConfig;
+- (NSDictionary *) buildDefaultConfig;
 - (NSString *) defaultConfigFilePath;
 - (NSString *) defaultConfigDirectoryPath;
 
@@ -44,8 +46,11 @@
 - (NSString *) fetchAuthToken;
 - (NSString *) locationAtIndex:(int) index;
 - (int) locationCount;
+- (void) addLocation:(NSString *) newLocation;
+- (void) removeLocationAt:(NSInteger) index;
+- (void) setLocationName:(id)name atIndex:(NSInteger) index;
 
 @end
 
-#endif // _CONFIGSERVICE_H_
+#endif // _ConfigManager_H_
 

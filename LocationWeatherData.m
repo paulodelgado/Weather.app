@@ -28,8 +28,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 NSDictionary *current;
 NSDictionary *location;
 
-- (id) initWithDictionary:(NSDictionary *) dict
-{
+- (id) initWithDictionary:(NSDictionary *) dict {
   NSLog(@"LocationWeatherData#initWithDictionary");
   self = [super init];
   if(self) {
@@ -41,8 +40,7 @@ NSDictionary *location;
   return self;
 }
 
-- (NSString *) temperature
-{
+- (NSString *) temperature {
   NSLog(@"LocationWeatherData#temperature");
   NSString *temperatureString = [current valueForKey:@"temp_f"];
   NSInteger temperatureInteger = [temperatureString integerValue];
@@ -50,41 +48,51 @@ NSDictionary *location;
   return [NSString stringWithFormat:@"%d°", temperatureInteger];
 }
 
-- (NSDictionary *) current
-{
+- (NSDictionary *) current {
   return current;
 }
 
-- (void) setCurrent:(NSDictionary *) newCurrent
-{
+- (void) setCurrent:(NSDictionary *) newCurrent {
   current = newCurrent;
 }
 
-- (NSDictionary *) location
-{
+- (NSDictionary *) location {
   return location;
 }
 
-- (void) setLocation:(NSDictionary *) newLocation
-{
+- (void) setLocation:(NSDictionary *) newLocation {
   location = newLocation;
 }
 
-- (NSString *) locationName
-{
+- (NSString *) locationName {
   return [location valueForKey:@"name"];
 }
 
 
-- (NSDictionary *) currentCondition
-{
+- (NSDictionary *) currentCondition {
   return [current valueForKey:@"condition"];
 }
 
-- (NSString *) icon
-{ 
-  NSDictionary *currentCondition = [self currentCondition];
-  return [NSString stringWithFormat:@"http:%@", [currentCondition valueForKey:@"icon"]];
+- (NSString *) humidity {
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"humidity"], @"%"];
 }
 
+- (NSString *) pressure {
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"pressure_in"], @" in"];
+}
+
+- (NSString *) precipitation {
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"precip_in"], @" in"];
+}
+
+- (NSString *) windSpeed {
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"wind_mph"], @" mph"];
+}
+
+- (NSString *) conditionIcon { 
+  NSDictionary *currentCondition = [self currentCondition];
+  NSString *icon64 = [currentCondition valueForKey:@"icon"];
+  NSString *icon128 = [icon64 stringByReplacingOccurrencesOfString:@"64x64" withString:@"128x128"];
+  return [NSString stringWithFormat:@"http:%@", icon128];
+}
 @end

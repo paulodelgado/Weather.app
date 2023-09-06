@@ -12,21 +12,26 @@
 #import <AppKit/AppKit.h>
 #import "LocationWeatherData.h"
 #import "WeatherApi.h"
-#import "ConfigService.h"
+#import "ConfigManager.h"
 #import "PreferencesController.h"
 
 
 @interface AppController : NSObject {
   id temperatureLabel;
   id locationLabel;
+  id windSpeedLabel;
+  id precipitationLabel;
+  id pressureLabel;
+  id humidityLabel;
   id imageView;
+
   id nextLocationButton;
   id previousLocationButton;
-  ConfigService *configService;
+
   WeatherApi *api;
   PreferencesController *preferencesController;
+  NSImage *conditionIcon;
   
-  int savedLocationsCount;
   int currentLocationIndex;
 }
 
@@ -43,7 +48,6 @@
 - (void) showNextLocation: (id)sender;
 - (void) showPreviousLocation: (id)sender;
 - (void) setupWeatherApi;
-- (void) setupConfigService;
 - (void) fetchWeatherForCurrentIndex;
 
 @end

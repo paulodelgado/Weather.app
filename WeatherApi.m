@@ -29,8 +29,6 @@
 @implementation WeatherApi
 
 NSString *authToken;
-GWSService *service;
-
 
 - (id) initWithToken:(NSString *) token
 {
@@ -41,15 +39,10 @@ GWSService *service;
   return self;
 }
 
-- (void) initService
-{
-  service = [GWSService new];
-}
-
 - (LocationWeatherData *) fetchWeatherDataFor:(NSString *) location
 {
   NSMutableDictionary *result;
-  service = [GWSService new];
+  GWSService *service = [GWSService new];
   NSString *unescapedURL = [NSString stringWithFormat:@"https://api.weatherapi.com/v1/current.json?key=%@&q=%@", authToken, location];
   NSString *urlEndpoint = [unescapedURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   NSLog(@"%@", urlEndpoint);

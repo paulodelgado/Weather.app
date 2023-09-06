@@ -25,7 +25,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 VERSION = 0.1
 PACKAGE_NAME = Weather
 APP_NAME = Weather
-Weather_APPLICATION_ICON = 
+Weather_APPLICATION_ICON = icon.png
 
 
 #
@@ -39,7 +39,9 @@ Weather_LIBRARIES_DEPEND_UPON += -lWebServices
 Weather_RESOURCE_FILES = \
 Resources/Weather.gorm \
 Resources/Preferences.gorm \
-Resources/weatherapi_logo.png 
+Resources/weatherapi_logo.png \
+Resources/icon.png \
+Resources/icon.tiff 
 
 
 #
@@ -49,7 +51,7 @@ Weather_HEADER_FILES = \
 AppController.h \
 LocationWeatherData.h \
 WeatherApi.h \
-ConfigService.h \
+ConfigManager.h \
 PreferencesController.h
 
 #
@@ -59,7 +61,7 @@ Weather_OBJC_FILES = \
 AppController.m \
 LocationWeatherData.m \
 WeatherApi.m \
-ConfigService.m \
+ConfigManager.m \
 PreferencesController.m
 
 #
