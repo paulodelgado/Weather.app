@@ -42,3 +42,6 @@ My config file looks as follows:
 # Contributing
 This is free software, clone this repo, create a feature branch and make a pull request. Maybe I'll merge it.
 
+# Screenshots
+* Screenshot with Preferences window display alongside GWorkspace and WindowMaker
+![Screenshot with Preferences window display alongside GWorkspace and WindowMaker](https://github.com/paulodelgado/Weather.app/blob/master/GitHub/Weather.app%20with%20GWorkspace.png?raw=true)
