@@ -28,7 +28,10 @@
 
 - (void) awakeFromNib {
   NSString *authToken = [[ConfigManager defaultManager] fetchAuthToken];
+  
+  
   [tokenTextField setObjectValue:authToken];
+  [useMetricSystemButton setState:[[ConfigManager defaultManager] getUseMetricSystem]];
 }
 
 - (IBAction) setApiToken:(id) sender {
@@ -38,7 +41,7 @@
 
 - (IBAction) setUseMetricSystem:(id) sender {
   NSLog(@"PreferencesController#setUseMetricSystem");
-
+  [[ConfigManager defaultManager] setUseMetricSystem:[useMetricSystemButton state]];
 }
 
 - (IBAction) addLocation:(id) sender {

@@ -56,10 +56,19 @@ static ConfigManager *defaultManager;
   return [configDictionary valueForKey:@"api_key"];
 }
 
-- (NSDictionary *) buildDefaultConfig {
+- (BOOL) getUseMetricSystem {
+  return [[configDictionary valueForKey:@"use_metric_system"] boolValue];
+}
+
+- (void) setUseMetricSystem:(BOOL) newValue {
+  NSString *stringValue = (newValue ? @"true" : @"false");
+  [configDictionary setObject:stringValue forKeyedSubscript:@"use_metric_system"];
+}
+
+- (NSMutableDictionary *) buildDefaultConfig {
   id locs[] = {@"Cupertino, CA", @"New York, NY"};
   NSArray *locations = [NSArray arrayWithObjects:locs count:2];
-  NSDictionary *newDict = [NSDictionary dictionaryWithObjectsAndKeys:
+  NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
     locations, @"locations", @"", @"api_key", @"false", @"use_metric_system", nil];
   return newDict;
 }
@@ -71,7 +80,7 @@ static ConfigManager *defaultManager;
   bool configFileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
 
   if(!configFileExists) {
-    NSDictionary *newConfig = [self buildDefaultConfig];
+    NSMutableDictionary *newConfig = [self buildDefaultConfig];
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -100,7 +109,7 @@ static ConfigManager *defaultManager;
 }
 
 - (void) setupDictionary {
-  configDictionary = [NSDictionary dictionaryWithContentsOfFile:[self defaultConfigFilePath]];
+  configDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:[self defaultConfigFilePath]];
   [configDictionary retain];
   locationsArr = [configDictionary valueForKey:@"locations"];
   [locationsArr retain];
@@ -114,7 +123,7 @@ static ConfigManager *defaultManager;
   return [locationsArr count];
 }
 
-- (void) saveNewConfig:(NSDictionary *) newConfig {
+- (void) saveNewConfig:(NSMutableDictionary *) newConfig {
   [newConfig writeToFile:[self defaultConfigFilePath] atomically:false];
   [self setupDictionary];
 }

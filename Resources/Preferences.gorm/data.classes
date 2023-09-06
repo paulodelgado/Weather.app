@@ -40,6 +40,13 @@
 	);
 	Super = NSObject;
     };
+    LocationWeatherData = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
     PreferencesController = {
 	Actions = (
 	    "setApiToken:",
@@ -49,7 +56,7 @@
 	);
 	Outlets = (
 	    tokenTextField,
-	    useMetricSystem,
+	    useMetricSystemButton,
 	    locationsTableView
 	);
 	Super = NSWindowController;

@@ -19,6 +19,13 @@
 	);
 	Super = NSObject;
     };
+    ConfigManager = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
     ConfigService = {
 	Actions = (
 	);
@@ -35,7 +42,11 @@
     };
     FirstResponder = {
 	Actions = (
+	    "addLocation:",
 	    "orderFrontFontPanel:",
+	    "removeLocation:",
+	    "setApiToken:",
+	    "setUseMetricSystem:",
 	    "showNextLocation:",
 	    "showPrefPanel:",
 	    "showPreviousLocation:"
@@ -56,19 +67,17 @@
 	);
 	Super = NSObject;
     };
-    NewClass1 = {
-	Actions = (
-	);
-	Outlets = (
-	);
-	Super = NSObject;
-    };
     PreferencesController = {
 	Actions = (
+	    "setApiToken:",
+	    "setUseMetricSystem:",
+	    "addLocation:",
+	    "removeLocation:"
 	);
 	Outlets = (
 	    tokenTextField,
-	    selectedUnits
+	    useMetricSystemButton,
+	    locationsTableView
 	);
 	Super = NSWindowController;
     };
@@ -87,5 +96,19 @@
 	Outlets = (
 	);
 	Super = NSObject;
+    };
+    WeatherView = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSView;
+    };
+    WeatherWindow = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSWindow;
     };
 }

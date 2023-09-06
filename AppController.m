@@ -56,10 +56,8 @@ int currentLocationIndex = 0;
   
   NSURL *iconURL = [NSURL URLWithString:iconURLString];
 
-  [conditionIcon release];
-  [imageView delete:nil];
-  conditionIcon = [[NSImage alloc] initWithContentsOfURL:iconURL];
-  [imageView setImage:conditionIcon];
+  NSImage *newConditionIcon = [[NSImage alloc] initWithContentsOfURL:iconURL];
+  [imageView setImage:newConditionIcon];
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif {

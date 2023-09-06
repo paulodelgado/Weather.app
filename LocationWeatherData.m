@@ -38,10 +38,12 @@ NSDictionary *location;
 }
 
 - (NSString *) temperature {
-  NSString *temperatureString = [current valueForKey:@"temp_f"];
-  NSInteger temperatureInteger = [temperatureString integerValue];
+  BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
+  NSString *key = useMetricSystem ? @"temp_c" : @"temp_f";
+  NSString *temperatureString = [current valueForKey:key];
+  float temperatureFloat = [temperatureString floatValue];
   
-  return [NSString stringWithFormat:@"%d°", temperatureInteger];
+  return [NSString stringWithFormat:@"%.01f°", temperatureFloat];
 }
 
 - (NSDictionary *) current {
@@ -74,15 +76,25 @@ NSDictionary *location;
 }
 
 - (NSString *) pressure {
-  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"pressure_in"], @" in"];
+  BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
+  NSString *key =  useMetricSystem ? @"pressure_mb" : @"pressure_in";
+  NSString *unit = useMetricSystem ? @"mb" : @"in";
+  return [NSString stringWithFormat:@"%@ %@", [current valueForKey:key], unit];
 }
 
 - (NSString *) precipitation {
-  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"precip_in"], @" in"];
+  BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
+  NSString *key = useMetricSystem ? @"precip_mm" : @"precip_in";
+  NSString *unit = useMetricSystem ? @"mm" : @"in";
+
+  return [NSString stringWithFormat:@"%@ %@", [current valueForKey:key], unit];
 }
 
 - (NSString *) windSpeed {
-  return [NSString stringWithFormat:@"%@%@", [current valueForKey:@"wind_mph"], @" mph"];
+  BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
+  NSString *key = useMetricSystem ? @"wind_kph" : @"wind_mph";
+  NSString *unit = useMetricSystem ? @"kph" : @"mph";
+  return [NSString stringWithFormat:@"%@ %@", [current valueForKey:key], unit];
 }
 
 - (NSString *) conditionIcon { 

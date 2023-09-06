@@ -16,7 +16,9 @@
 	"LocationWeatherData.m",
 	"WeatherApi.m",
 	"ConfigManager.m",
-	"PreferencesController.m"
+	"PreferencesController.m",
+	"WeatherView.m",
+	"WeatherWindow.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -30,7 +32,9 @@
 	"LocationWeatherData.h",
 	"WeatherApi.h",
 	"ConfigManager.h",
-	"PreferencesController.h"
+	"PreferencesController.h",
+	"WeatherView.h",
+	"WeatherWindow.h"
     );
     IMAGES = (
 	"weatherapi_logo.png",

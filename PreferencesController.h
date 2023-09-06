@@ -31,8 +31,9 @@
 
 @interface PreferencesController : NSWindowController <NSTableViewDataSource> {
   id tokenTextField;
-  id useMetricSystem;
+  id useMetricSystemButton;
   id window;
+  
   
   NSMutableArray *locationsArr;
   IBOutlet NSTableView *locationsTableView;

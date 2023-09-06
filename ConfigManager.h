@@ -29,26 +29,30 @@
 
 @interface ConfigManager : NSObject
 {
-  NSDictionary *configDictionary;
+  NSMutableDictionary *configDictionary;
   NSMutableArray *locationsArr;
 }
 
 + (ConfigManager *) defaultManager;
 
 - (void) setupDictionary;
-- (void) saveNewConfig:(NSDictionary *) newConfig;
-- (NSDictionary *) buildDefaultConfig;
+- (void) saveNewConfig:(NSMutableDictionary *) newConfig;
+- (NSMutableDictionary *) buildDefaultConfig;
 - (NSString *) defaultConfigFilePath;
 - (NSString *) defaultConfigDirectoryPath;
 
 - (void) createConfigFileIfMissing;
 
 - (NSString *) fetchAuthToken;
+- (BOOL) getUseMetricSystem;
+
 - (NSString *) locationAtIndex:(int) index;
 - (int) locationCount;
+
 - (void) addLocation:(NSString *) newLocation;
 - (void) removeLocationAt:(NSInteger) index;
 - (void) setLocationName:(id)name atIndex:(NSInteger) index;
+- (void) setUseMetricSystem:(BOOL) newValue;
 
 @end
 

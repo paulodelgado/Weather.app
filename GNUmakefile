@@ -52,7 +52,9 @@ AppController.h \
 LocationWeatherData.h \
 WeatherApi.h \
 ConfigManager.h \
-PreferencesController.h
+PreferencesController.h \
+WeatherView.h \
+WeatherWindow.h
 
 #
 # Objective-C Class files
@@ -62,7 +64,9 @@ AppController.m \
 LocationWeatherData.m \
 WeatherApi.m \
 ConfigManager.m \
-PreferencesController.m
+PreferencesController.m \
+WeatherView.m \
+WeatherWindow.m
 
 #
 # Other sources
