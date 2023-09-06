@@ -29,11 +29,8 @@ NSDictionary *current;
 NSDictionary *location;
 
 - (id) initWithDictionary:(NSDictionary *) dict {
-  NSLog(@"LocationWeatherData#initWithDictionary");
   self = [super init];
   if(self) {
-    NSLog(@"retrieving Data from Dictionary");
-    NSLog(@"keys: %@", [dict allKeys]);
     [self setCurrent:[dict valueForKey:@"current"]];
     [self setLocation: [dict valueForKey:@"location"]];
   }
@@ -41,7 +38,6 @@ NSDictionary *location;
 }
 
 - (NSString *) temperature {
-  NSLog(@"LocationWeatherData#temperature");
   NSString *temperatureString = [current valueForKey:@"temp_f"];
   NSInteger temperatureInteger = [temperatureString integerValue];
   

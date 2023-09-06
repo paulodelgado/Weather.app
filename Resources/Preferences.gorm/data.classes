@@ -9,6 +9,10 @@
 	Outlets = (
 	    temperatureLabel,
 	    locationLabel,
+	    windSpeedLabel,
+	    precipitationLabel,
+	    pressureLabel,
+	    humidityLabel,
 	    imageView,
 	    nextLocationButton,
 	    previousLocationButton
@@ -41,8 +45,7 @@
 	    "setApiToken:",
 	    "setUseMetricSystem:",
 	    "addLocation:",
-	    "removeLocation:",
-	    "updateLocation:"
+	    "removeLocation:"
 	);
 	Outlets = (
 	    tokenTextField,

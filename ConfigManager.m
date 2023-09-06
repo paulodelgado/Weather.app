@@ -53,18 +53,14 @@ static ConfigManager *defaultManager;
 }
 
 - (NSString *) fetchAuthToken {
-  NSLog(@"ConfigManager#fetchAuthToken");
   return [configDictionary valueForKey:@"api_key"];
 }
 
 - (NSDictionary *) buildDefaultConfig {
-  NSLog(@"ConfigManager#buildDefaultConfig");
-
-
   id locs[] = {@"Cupertino, CA", @"New York, NY"};
   NSArray *locations = [NSArray arrayWithObjects:locs count:2];
   NSDictionary *newDict = [NSDictionary dictionaryWithObjectsAndKeys:
-    locations, @"locations", @"", @"api_key", nil];
+    locations, @"locations", @"", @"api_key", @"false", @"use_metric_system", nil];
   return newDict;
 }
 
@@ -124,10 +120,7 @@ static ConfigManager *defaultManager;
 }
 
 - (void) addLocation:(NSString *) newLocation {
-  NSLog(@"ConfigManager#addLocation");
-  NSLog(@"locationsArr before: %@", locationsArr);
   [locationsArr addObject:newLocation];
-  NSLog(@"locationsArr after: %@", locationsArr);
 }
 
 - (void) removeLocationAt:(NSInteger) index {

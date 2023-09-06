@@ -15,14 +15,12 @@ Application Controller
 int currentLocationIndex = 0;
 
 + (void) initialize {
-  NSLog(@"AppController#initialize");
   NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
   [[NSUserDefaults standardUserDefaults] registerDefaults: defaults];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (id) init {
-  NSLog(@"AppController#init");
   if ((self = [super init]))
   {
   }
@@ -34,7 +32,6 @@ int currentLocationIndex = 0;
 }
 
 - (void) awakeFromNib {
-  NSLog(@"awakeFromNib");
   currentLocationIndex = 0;
   [self setupWeatherApi];
   [self fetchWeatherForCurrentIndex];
@@ -44,12 +41,8 @@ int currentLocationIndex = 0;
   api = [[WeatherApi alloc] initWithToken:[[ConfigManager defaultManager] fetchAuthToken]];
 }
 
-- (void) fetchWeatherForCurrentIndex {
-  NSLog(@"AppController#fetchWeatherForCurrentIndex");
-  
-  
+- (void) fetchWeatherForCurrentIndex {  
   NSString *savedLocationName = [[ConfigManager defaultManager] locationAtIndex:currentLocationIndex];
-  NSLog(@"fetching weather for location (%@)", savedLocationName);
   LocationWeatherData *lwd = [api fetchWeatherDataFor:savedLocationName];
 
   [locationLabel setStringValue:[lwd locationName]];
@@ -60,7 +53,6 @@ int currentLocationIndex = 0;
   [humidityLabel setStringValue:[lwd humidity]];
   
   NSString *iconURLString = [lwd conditionIcon];
-  NSLog(@"icon url: %@", iconURLString);
   
   NSURL *iconURL = [NSURL URLWithString:iconURLString];
 
@@ -71,14 +63,15 @@ int currentLocationIndex = 0;
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif {
-  NSLog(@"applicationDidFinishLaunching");
 }
 
 - (BOOL) applicationShouldTerminate: (id)sender {
+  NSLog(@"applicationShouldTerminate");
   return YES;
 }
 
 - (void) applicationWillTerminate: (NSNotification *)aNotif {
+  NSLog(@"applicationWillTerminate");
 }
 
 - (BOOL) application: (NSApplication *)application
@@ -87,7 +80,6 @@ int currentLocationIndex = 0;
 }
 
 - (IBAction) showPrefPanel: (id)sender {
-  NSLog(@"Something triggered showPrefPanel!");
   if(!preferencesController) {
     preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"Preferences"];
   }
@@ -96,7 +88,6 @@ int currentLocationIndex = 0;
 
 
 - (void) showNextLocation: (id)sender {
-  NSLog(@"AppController#showNextLocation");
   if(currentLocationIndex + 1 >= [[ConfigManager defaultManager] locationCount]) {
     return;
   } else {
@@ -106,7 +97,6 @@ int currentLocationIndex = 0;
 }
 
 - (void) showPreviousLocation: (id)sender {
-  NSLog(@"AppController#showPreviousLocation");
   if(currentLocationIndex == 0) {
     return;
   } else {

@@ -30,8 +30,7 @@
 
 NSString *authToken;
 
-- (id) initWithToken:(NSString *) token
-{
+- (id) initWithToken:(NSString *) token {
   self = [super init];
   if(self) {
     authToken = token;
@@ -39,29 +38,23 @@ NSString *authToken;
   return self;
 }
 
-- (LocationWeatherData *) fetchWeatherDataFor:(NSString *) location
-{
+- (LocationWeatherData *) fetchWeatherDataFor:(NSString *) location {
   NSMutableDictionary *result;
   GWSService *service = [GWSService new];
   NSString *unescapedURL = [NSString stringWithFormat:@"https://api.weatherapi.com/v1/current.json?key=%@&q=%@", authToken, location];
   NSString *urlEndpoint = [unescapedURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-  NSLog(@"%@", urlEndpoint);
   [service setURL: urlEndpoint];
   [service setHTTPMethod:@"GET"];
 
   [service setCoder: [GWSJSONCoder coder]];
 
-  NSLog(@"Service: %@", service);
-
   result = [service invokeMethod:@"current.json"
     parameters: nil
          order: 0
        timeout: 30];
-  NSLog(@"Result - %@", result);
   NSDictionary *myResult = [result valueForKey:@"GWSCoderParameters"];
   NSDictionary *weatherData = [myResult valueForKey:@"Result"];
   LocationWeatherData *data = [[LocationWeatherData alloc] initWithDictionary:weatherData];
   return data;
 }
-
 @end
