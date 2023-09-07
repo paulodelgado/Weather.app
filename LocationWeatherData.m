@@ -79,7 +79,7 @@ NSDictionary *location;
   BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
   NSString *key =  useMetricSystem ? @"pressure_mb" : @"pressure_in";
   NSString *unit = useMetricSystem ? @"mb" : @"in";
-  return [NSString stringWithFormat:@"%@ %@", [current valueForKey:key], unit];
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:key], unit];
 }
 
 - (NSString *) precipitation {
@@ -87,14 +87,14 @@ NSDictionary *location;
   NSString *key = useMetricSystem ? @"precip_mm" : @"precip_in";
   NSString *unit = useMetricSystem ? @"mm" : @"in";
 
-  return [NSString stringWithFormat:@"%@ %@", [current valueForKey:key], unit];
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:key], unit];
 }
 
 - (NSString *) windSpeed {
   BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
   NSString *key = useMetricSystem ? @"wind_kph" : @"wind_mph";
   NSString *unit = useMetricSystem ? @"kph" : @"mph";
-  return [NSString stringWithFormat:@"%@ %@", [current valueForKey:key], unit];
+  return [NSString stringWithFormat:@"%@%@", [current valueForKey:key], unit];
 }
 
 - (NSString *) conditionIcon { 

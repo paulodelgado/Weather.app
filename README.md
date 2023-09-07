@@ -36,7 +36,6 @@ My config file looks as follows:
 * The "current location icon" doesn't update/change when you switch between locations/cities.
 
 # To-Do's
-* Save configuration settings (preferrably before quitting the app).
 * Use a nicer background depending on the weather api current condition code.
 
 # Contributing
