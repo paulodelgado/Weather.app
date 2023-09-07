@@ -37,6 +37,7 @@
 
 - (void) setupDictionary;
 - (void) saveNewConfig:(NSMutableDictionary *) newConfig;
+- (void) saveConfig;
 - (NSMutableDictionary *) buildDefaultConfig;
 - (NSString *) defaultConfigFilePath;
 - (NSString *) defaultConfigDirectoryPath;

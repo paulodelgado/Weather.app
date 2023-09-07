@@ -70,6 +70,7 @@ int currentLocationIndex = 0;
 
 - (void) applicationWillTerminate: (NSNotification *)aNotif {
   NSLog(@"applicationWillTerminate");
+  [[ConfigManager defaultManager] saveConfig];
 }
 
 - (BOOL) application: (NSApplication *)application

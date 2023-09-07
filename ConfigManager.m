@@ -124,8 +124,12 @@ static ConfigManager *defaultManager;
 }
 
 - (void) saveNewConfig:(NSMutableDictionary *) newConfig {
-  [newConfig writeToFile:[self defaultConfigFilePath] atomically:false];
+  [newConfig writeToFile:[self defaultConfigFilePath] atomically:true];
   [self setupDictionary];
+}
+
+- (void) saveConfig {
+  [configDictionary writeToFile:[self defaultConfigFilePath] atomically:true];
 }
 
 - (void) addLocation:(NSString *) newLocation {
