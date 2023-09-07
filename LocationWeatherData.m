@@ -46,6 +46,10 @@ NSDictionary *location;
   return [NSString stringWithFormat:@"%.01f°", temperatureFloat];
 }
 
+- (NSString *) conditionText {
+  return [[self currentCondition] valueForKey:@"text"];
+}
+
 - (NSDictionary *) current {
   return current;
 }

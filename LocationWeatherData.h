@@ -38,9 +38,12 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 @property (assign) NSDictionary *location;
 
 - (id) initWithDictionary:(NSDictionary *) dict;
+- (NSDictionary *) currentCondition;
+
 - (NSString *) temperature;
 - (NSString *) locationName;
 - (NSString *) conditionIcon;
+- (NSString *) conditionText;
 
 - (NSString *) windSpeed;
 - (NSString *) precipitation;

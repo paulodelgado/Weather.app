@@ -24,6 +24,8 @@
   id pressureLabel;
   id humidityLabel;
   id imageView;
+  id conditionLabel;
+  id weatherView;
 
   id nextLocationButton;
   id previousLocationButton;

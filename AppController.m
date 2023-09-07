@@ -51,6 +51,7 @@ int currentLocationIndex = 0;
   [precipitationLabel setStringValue:[lwd precipitation]];
   [pressureLabel setStringValue:[lwd pressure]];
   [humidityLabel setStringValue:[lwd humidity]];
+  [conditionLabel setStringValue:[lwd conditionText]];
   
   NSString *iconURLString = [lwd conditionIcon];
   
