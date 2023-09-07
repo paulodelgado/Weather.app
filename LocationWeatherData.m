@@ -41,9 +41,13 @@ NSDictionary *location;
   BOOL useMetricSystem = [[ConfigManager defaultManager] getUseMetricSystem];
   NSString *key = useMetricSystem ? @"temp_c" : @"temp_f";
   NSString *temperatureString = [current valueForKey:key];
-  float temperatureFloat = [temperatureString floatValue];
-  
-  return [NSString stringWithFormat:@"%.01f°", temperatureFloat];
+  if(useMetricSystem) {
+    float temperatureFloat = [temperatureString floatValue];
+    return [NSString stringWithFormat:@"%.01f°", temperatureFloat];  
+  } else {
+    int temperatureInt = [temperatureString intValue];
+    return [NSString stringWithFormat:@"%d°", temperatureInt];
+  }
 }
 
 - (NSString *) conditionText {
