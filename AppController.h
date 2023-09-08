@@ -14,6 +14,7 @@
 #import "WeatherApi.h"
 #import "ConfigManager.h"
 #import "PreferencesController.h"
+#import "WeatherView.h"
 
 
 @interface AppController : NSObject {
@@ -26,6 +27,8 @@
   id imageView;
   id conditionLabel;
   id weatherView;
+  id window;
+  id locationsSubMenu;
 
   id nextLocationButton;
   id previousLocationButton;
@@ -50,7 +53,8 @@
 - (void) showNextLocation: (id)sender;
 - (void) showPreviousLocation: (id)sender;
 - (void) setupWeatherApi;
-- (void) fetchWeatherForCurrentIndex;
+- (void) fetchWeatherForCurrentIndex:(id) sender;
+- (void) showLocationAtIndex:(id)sender;
 
 @end
 

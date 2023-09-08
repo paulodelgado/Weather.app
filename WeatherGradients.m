@@ -28,4 +28,8 @@
 + (NSGradient *) defaultGradient {
   return [[self alloc] initWithStartingColor:[NSColor orangeColor] endingColor:[NSColor lightGrayColor]];
 }
+
++ (NSGradient *) nightGradient {
+  return [[self alloc] initWithStartingColor:[NSColor yellowColor] endingColor:[NSColor blueColor]];
+}
 @end

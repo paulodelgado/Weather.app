@@ -4,7 +4,9 @@
 	Actions = (
 	    "showPrefPanel:",
 	    "showNextLocation:",
-	    "showPreviousLocation:"
+	    "showPreviousLocation:",
+	    "fetchWeatherForCurrentIndex:",
+	    "showLocationAtIndex:"
 	);
 	Outlets = (
 	    temperatureLabel,
@@ -16,6 +18,8 @@
 	    imageView,
 	    conditionLabel,
 	    weatherView,
+	    window,
+	    locationsSubMenu,
 	    nextLocationButton,
 	    previousLocationButton
 	);
@@ -45,10 +49,12 @@
     FirstResponder = {
 	Actions = (
 	    "addLocation:",
+	    "fetchWeatherForCurrentIndex:",
 	    "orderFrontFontPanel:",
 	    "removeLocation:",
 	    "setApiToken:",
 	    "setUseMetricSystem:",
+	    "showLocationAtIndex:",
 	    "showNextLocation:",
 	    "showPrefPanel:",
 	    "showPreviousLocation:"
@@ -98,6 +104,13 @@
 	Outlets = (
 	);
 	Super = NSObject;
+    };
+    WeatherIconImageView = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSImageView;
     };
     WeatherView = {
 	Actions = (

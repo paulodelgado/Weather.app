@@ -18,7 +18,8 @@
 	"ConfigManager.m",
 	"PreferencesController.m",
 	"WeatherView.m",
-	"WeatherGradients.m"
+	"WeatherGradients.m",
+	"WeatherIconImageView.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -34,12 +35,14 @@
 	"ConfigManager.h",
 	"PreferencesController.h",
 	"WeatherView.h",
-	"WeatherGradients.h"
+	"WeatherGradients.h",
+	"WeatherIconImageView.h"
     );
     IMAGES = (
 	"weatherapi_logo.png",
 	"icon.png",
-	"icon.tiff"
+	"icon.tiff",
+	"loading.gif"
     );
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (

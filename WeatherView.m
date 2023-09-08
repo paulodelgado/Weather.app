@@ -5,10 +5,25 @@
 
 @implementation WeatherView
 
+@synthesize timeOfDay;
+
 - (void) drawRect: (NSRect)rect {
-  NSGradient *gradient = [WeatherGradients defaultGradient];
-  [gradient drawInRect:rect angle:90];
+/*
+  NSRect bounds = [self frame];
+  
+  NSGradient *gradient;
+  
+  if([timeOfDay isEqualToString:@"day"]) {
+    gradient = [WeatherGradients defaultGradient];
+  } else {
+    gradient = [WeatherGradients nightGradient];
+  }
+  
+  [gradient drawInRect:bounds angle:90];  
+  */
 }
 
+- (void) reDraw {
+}
 
 @end

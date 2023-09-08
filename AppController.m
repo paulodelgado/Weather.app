@@ -34,14 +34,36 @@ int currentLocationIndex = 0;
 - (void) awakeFromNib {
   currentLocationIndex = 0;
   [self setupWeatherApi];
-  [self fetchWeatherForCurrentIndex];
+  [self fetchWeatherForCurrentIndex:nil];
+  ConfigManager *myManager = [ConfigManager defaultManager];
+  
+  NSMenu *menu = [locationsSubMenu submenu];
+  
+  NSMenuItem *m = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
+  [m isSeparatorItem];
+  [menu addItem:m];
+  
+  int i;
+  for(i = 0; i < [myManager locationCount] ; i++) {
+    NSString *locationName = [myManager locationAtIndex:i];
+    SEL mySelector = @selector(showLocationAtIndex:); 
+    NSString *key;
+    if(i < 9) {
+      key = [NSString stringWithFormat:@"%d", i+1];
+    } else {
+      key = @"";
+    }
+     
+    NSMenuItem *m = [[NSMenuItem alloc] initWithTitle:locationName action:mySelector keyEquivalent:key];
+    [menu addItem:m];
+  }
 }
 
 - (void) setupWeatherApi {
   api = [[WeatherApi alloc] initWithToken:[[ConfigManager defaultManager] fetchAuthToken]];
 }
 
-- (void) fetchWeatherForCurrentIndex {  
+- (void) fetchWeatherForCurrentIndex:(id) sender {  
   NSString *savedLocationName = [[ConfigManager defaultManager] locationAtIndex:currentLocationIndex];
   LocationWeatherData *lwd = [api fetchWeatherDataFor:savedLocationName];
 
@@ -52,12 +74,13 @@ int currentLocationIndex = 0;
   [pressureLabel setStringValue:[lwd pressure]];
   [humidityLabel setStringValue:[lwd humidity]];
   [conditionLabel setStringValue:[lwd conditionText]];
+  NSString *timeOfDay = currentLocationIndex % 2 == 0 ? @"day" : @"night";
+  
+  [weatherView setTimeOfDay:timeOfDay];
   
   NSString *iconURLString = [lwd conditionIcon];
-  
   NSURL *iconURL = [NSURL URLWithString:iconURLString];
-
-  NSImage *newConditionIcon = [[NSImage alloc] initWithContentsOfURL:iconURL];
+  NSImage *newConditionIcon = [[NSImage alloc] initWithContentsOfURL: iconURL];
   [imageView setImage:newConditionIcon];
 }
 
@@ -65,12 +88,10 @@ int currentLocationIndex = 0;
 }
 
 - (BOOL) applicationShouldTerminate: (id)sender {
-  NSLog(@"applicationShouldTerminate");
   return YES;
 }
 
 - (void) applicationWillTerminate: (NSNotification *)aNotif {
-  NSLog(@"applicationWillTerminate");
   [[ConfigManager defaultManager] saveConfig];
 }
 
@@ -92,7 +113,7 @@ int currentLocationIndex = 0;
     return;
   } else {
     currentLocationIndex++;
-    [self fetchWeatherForCurrentIndex];
+    [self fetchWeatherForCurrentIndex:sender];
   }
 }
 
@@ -101,7 +122,13 @@ int currentLocationIndex = 0;
     return;
   } else {
     currentLocationIndex--;
-    [self fetchWeatherForCurrentIndex];
+    [self fetchWeatherForCurrentIndex:sender];
   }
+}
+
+- (void) showLocationAtIndex:(id)sender {
+  NSInteger index = [[sender keyEquivalent] integerValue] - 1;
+  currentLocationIndex = index;
+  [self fetchWeatherForCurrentIndex:sender];
 }
 @end

@@ -41,7 +41,8 @@ Resources/Weather.gorm \
 Resources/Preferences.gorm \
 Resources/weatherapi_logo.png \
 Resources/icon.png \
-Resources/icon.tiff 
+Resources/icon.tiff \
+Resources/loading.gif 
 
 
 #
@@ -54,7 +55,8 @@ WeatherApi.h \
 ConfigManager.h \
 PreferencesController.h \
 WeatherView.h \
-WeatherGradients.h
+WeatherGradients.h \
+WeatherIconImageView.h
 
 #
 # Objective-C Class files
@@ -66,7 +68,8 @@ WeatherApi.m \
 ConfigManager.m \
 PreferencesController.m \
 WeatherView.m \
-WeatherGradients.m
+WeatherGradients.m \
+WeatherIconImageView.m
 
 #
 # Other sources

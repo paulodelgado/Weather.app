@@ -33,7 +33,10 @@
 
 }
 + (NSGradient *) defaultGradient;
++ (NSGradient *) nightGradient;
+
 @end
+
 
 #endif // _WEATHERGRADIENTS_H_
 

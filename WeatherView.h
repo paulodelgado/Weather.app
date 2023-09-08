@@ -5,5 +5,11 @@
 
 @interface WeatherView : NSView
 {
+  NSString *timeOfDay;
 }
+
+
+@property (nonatomic, retain) NSString *timeOfDay;
+
+- (void) reDraw;
 @end
