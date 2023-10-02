@@ -56,7 +56,8 @@ ConfigManager.h \
 PreferencesController.h \
 WeatherView.h \
 WeatherGradients.h \
-WeatherIconImageView.h
+WeatherIconImageView.h \
+WeatherWindow.h
 
 #
 # Objective-C Class files
@@ -69,7 +70,8 @@ ConfigManager.m \
 PreferencesController.m \
 WeatherView.m \
 WeatherGradients.m \
-WeatherIconImageView.m
+WeatherIconImageView.m \
+WeatherWindow.m
 
 #
 # Other sources

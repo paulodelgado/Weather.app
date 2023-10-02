@@ -7,10 +7,9 @@
 
 @synthesize timeOfDay;
 
-- (void) drawRect: (NSRect)rect {
-/*
-  NSRect bounds = [self frame];
-  
+- (void) drawRect: (NSRect)dirtyRect {
+
+  NSRect bounds = [self bounds];
   NSGradient *gradient;
   
   if([timeOfDay isEqualToString:@"day"]) {
@@ -20,10 +19,7 @@
   }
   
   [gradient drawInRect:bounds angle:90];  
-  */
-}
-
-- (void) reDraw {
+  [super drawRect:bounds];
 }
 
 @end

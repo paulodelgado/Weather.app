@@ -11,5 +11,4 @@
 
 @property (nonatomic, retain) NSString *timeOfDay;
 
-- (void) reDraw;
 @end

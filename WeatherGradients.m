@@ -26,7 +26,7 @@
 
 @implementation WeatherGradients
 + (NSGradient *) defaultGradient {
-  return [[self alloc] initWithStartingColor:[NSColor orangeColor] endingColor:[NSColor lightGrayColor]];
+  return [[self alloc] initWithStartingColor:[NSColor yellowColor] endingColor:[NSColor orangeColor]];
 }
 
 + (NSGradient *) nightGradient {

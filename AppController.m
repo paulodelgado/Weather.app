@@ -36,13 +36,13 @@ int currentLocationIndex = 0;
   [self setupWeatherApi];
   [self fetchWeatherForCurrentIndex:nil];
   ConfigManager *myManager = [ConfigManager defaultManager];
-  
+
   NSMenu *menu = [locationsSubMenu submenu];
-  
+
   NSMenuItem *m = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
   [m isSeparatorItem];
   [menu addItem:m];
-  
+
   int i;
   for(i = 0; i < [myManager locationCount] ; i++) {
     NSString *locationName = [myManager locationAtIndex:i];
@@ -53,7 +53,6 @@ int currentLocationIndex = 0;
     } else {
       key = @"";
     }
-     
     NSMenuItem *m = [[NSMenuItem alloc] initWithTitle:locationName action:mySelector keyEquivalent:key];
     [menu addItem:m];
   }
@@ -82,6 +81,7 @@ int currentLocationIndex = 0;
   NSURL *iconURL = [NSURL URLWithString:iconURLString];
   NSImage *newConditionIcon = [[NSImage alloc] initWithContentsOfURL: iconURL];
   [imageView setImage:newConditionIcon];
+  [window display];
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif {
