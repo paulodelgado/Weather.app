@@ -57,7 +57,9 @@ PreferencesController.h \
 WeatherView.h \
 WeatherGradients.h \
 WeatherIconImageView.h \
-WeatherWindow.h
+WeatherWindow.h \
+GSMetNoWeather.h \
+GSNominatim.h
 
 #
 # Objective-C Class files
@@ -71,7 +73,9 @@ PreferencesController.m \
 WeatherView.m \
 WeatherGradients.m \
 WeatherIconImageView.m \
-WeatherWindow.m
+WeatherWindow.m \
+GSMetNoWeather.m \
+GSNominatim.m
 
 #
 # Other sources
