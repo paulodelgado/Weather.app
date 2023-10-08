@@ -73,10 +73,9 @@ int currentLocationIndex = 0;
   [pressureLabel setStringValue:[lwd pressure]];
   [humidityLabel setStringValue:[lwd humidity]];
   [conditionLabel setStringValue:[lwd conditionText]];
+
   NSString *timeOfDay = currentLocationIndex % 2 == 0 ? @"day" : @"night";
-  
   [weatherView setTimeOfDay:timeOfDay];
-  
   NSString *iconURLString = [lwd conditionIcon];
   NSURL *iconURL = [NSURL URLWithString:iconURLString];
   NSImage *newConditionIcon = [[NSImage alloc] initWithContentsOfURL: iconURL];

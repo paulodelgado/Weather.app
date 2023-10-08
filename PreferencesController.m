@@ -45,8 +45,11 @@
 }
 
 - (IBAction) addLocation:(id) sender {
-  [[ConfigManager defaultManager] addLocation:@""];
-  [locationsTableView reloadData];
+  NSLog(@"preferencesConroller#addLocation");
+  locationSearchController = [[LocationSearchController alloc] initWithWindowNibName:@"LocationSearchWindow"];
+  [locationSearchController showWindow:nil];
+  /* [[ConfigManager defaultManager] addLocation:@""]; */
+  /* [locationsTableView reloadData]; */
 }
 
 - (IBAction) removeLocation:(id) sender {

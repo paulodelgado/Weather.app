@@ -38,21 +38,36 @@ static NSString *const NOMINATIM_BASE_URL = @"https://nominatim.openstreetmap.or
   ];
 }
 
-- (NSDictionary *) coordsFromQuery:(NSString *) query {
+- (void)fetchCoordinatesForLocation:(NSString *)locationQuery completionHandler:(void (^)(double, double, NSError *))completionHandler {
+    NSString *urlString = [self searchURL:locationQuery];
 
-  NSMutableDictionary *result;
-  GWSService *service = [GWSService new];
-  [service setURL: [self searchURL:query]];
-  [service setHTTPMethod:@"GET"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
-  [service setCoder: [GWSJSONCoder coder]];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            completionHandler(0.0, 0.0, error);
+            return;
+        }
 
-  result = [service invokeMethod:@"search"
-    parameters: nil
-         order: 0
-       timeout: 30];
-  NSDictionary *myResult = [result valueForKey:@"GWSCoderParameters"];
-  NSDictionary *locationData = [myResult valueForKey:@"Result"];
-  return locationData;
+        NSError *jsonError;
+        NSArray *results = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+
+        if (jsonError || ![results isKindOfClass:[NSArray class]] || results.count == 0) {
+            completionHandler(0.0, 0.0, jsonError ?: [self customError]);
+        } else {
+            NSDictionary *firstResult = results.firstObject;
+            double latitude = [firstResult[@"lat"] doubleValue];
+            double longitude = [firstResult[@"lon"] doubleValue];
+            completionHandler(latitude, longitude, nil);
+        }
+    }];
+
+    [task resume];
+}
+
+- (NSError *)customError {
+    return [NSError errorWithDomain:@"GeolocationServiceErrorDomain" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Failed to retrieve geolocation data."}];
 }
 @end

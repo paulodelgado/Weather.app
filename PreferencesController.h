@@ -28,13 +28,13 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "ConfigManager.h"
+#import "LocationSearchController.h"
 
 @interface PreferencesController : NSWindowController <NSTableViewDataSource> {
   id tokenTextField;
   id useMetricSystemButton;
   id window;
-  
-  
+  LocationSearchController *locationSearchController;
   NSMutableArray *locationsArr;
   IBOutlet NSTableView *locationsTableView;
 }
@@ -43,9 +43,6 @@
 - (IBAction) setUseMetricSystem:(id) sender;
 - (IBAction) addLocation:(id) sender;
 - (IBAction) removeLocation:(id) sender;
-
-
-
 @end
 
 #endif // _PREFERENCESPANECONTROLLER_H_

@@ -39,6 +39,7 @@ Weather_LIBRARIES_DEPEND_UPON += -lWebServices
 Weather_RESOURCE_FILES = \
 Resources/Weather.gorm \
 Resources/Preferences.gorm \
+Resources/LocationSearchWindow.gorm \
 Resources/weatherapi_logo.png \
 Resources/icon.png \
 Resources/icon.tiff \
@@ -58,8 +59,9 @@ WeatherView.h \
 WeatherGradients.h \
 WeatherIconImageView.h \
 WeatherWindow.h \
+GSNominatim.h \
 GSMetNoWeather.h \
-GSNominatim.h
+LocationSearchController.h
 
 #
 # Objective-C Class files
@@ -74,8 +76,9 @@ WeatherView.m \
 WeatherGradients.m \
 WeatherIconImageView.m \
 WeatherWindow.m \
+GSNominatim.m \
 GSMetNoWeather.m \
-GSNominatim.m
+LocationSearchController.m
 
 #
 # Other sources

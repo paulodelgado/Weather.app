@@ -20,7 +20,10 @@
 	"WeatherView.m",
 	"WeatherGradients.m",
 	"WeatherIconImageView.m",
-	"WeatherWindow.m"
+	"WeatherWindow.m",
+	"GSNominatim.m",
+	"GSMetNoWeather.m",
+	"LocationSearchController.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -38,7 +41,10 @@
 	"WeatherView.h",
 	"WeatherGradients.h",
 	"WeatherIconImageView.h",
-	"WeatherWindow.h"
+	"WeatherWindow.h",
+	"GSNominatim.h",
+	"GSMetNoWeather.h",
+	"LocationSearchController.h"
     );
     IMAGES = (
 	"weatherapi_logo.png",
@@ -49,7 +55,8 @@
     INSTALLDIR = "$(HOME)/GNUstep";
     INTERFACES = (
 	"Weather.gorm",
-	"Preferences.gorm"
+	"Preferences.gorm",
+	"LocationSearchWindow.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (

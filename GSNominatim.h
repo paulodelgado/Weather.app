@@ -37,7 +37,8 @@
 {
 }
 
-- (NSDictionary *) coordsFromQuery:(NSString *) query;
+- (NSString *) searchURL:(NSString *) query;
+- (void)fetchCoordinatesForLocation:(NSString *)locationQuery completionHandler:(void (^)(double latitude, double longitude, NSError *error))completionHandler;
 
 @end
 

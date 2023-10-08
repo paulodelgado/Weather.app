@@ -28,14 +28,16 @@
 #define _GNUSTEP_MET_NO_WEATHER_H_
 
 #import <Foundation/Foundation.h>
-#import "WebServices/GWSService.h"
-#import "WebServices/GWSCoder.h"
 
 @interface GSMetNoWeather : NSObject
 {
 }
 
-- (NSDictionary *) locationForecast:(float) latitude longitude:(float) longitude;
+- (NSString *) locationForecastURL:(double) latitude
+                         longitude:(double) longitude;
+- (void)fetchWeatherDataForLatitude:(double)latitude
+    longitude:(double)longitude
+    completionHandler:(void (^)(NSDictionary *weatherData, NSError *error))completionHandler;
 
 @end
 

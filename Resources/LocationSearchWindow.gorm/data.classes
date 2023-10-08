@@ -1,0 +1,24 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "closeWindow:",
+	    "saveLocationData:",
+	    "startSearch:"
+	);
+	Super = NSObject;
+    };
+    LocationSearchController = {
+	Actions = (
+	    "startSearch:",
+	    "saveLocationData:",
+	    "closeWindow:"
+	);
+	Outlets = (
+	    validLocationIndicator,
+	    addLocationButton,
+	    startSearchButton
+	);
+	Super = NSWindowController;
+    };
+}
