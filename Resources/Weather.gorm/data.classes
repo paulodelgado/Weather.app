@@ -61,20 +61,6 @@
 	);
 	Super = NSObject;
     };
-    LocationWeatherData = {
-	Actions = (
-	);
-	Outlets = (
-	);
-	Super = NSObject;
-    };
-    NewClass = {
-	Actions = (
-	);
-	Outlets = (
-	);
-	Super = NSObject;
-    };
     PreferencesController = {
 	Actions = (
 	    "setApiToken:",
@@ -105,6 +91,13 @@
 	);
 	Super = NSObject;
     };
+    WeatherData = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
     WeatherIconImageView = {
 	Actions = (
 	);
@@ -118,12 +111,5 @@
 	Outlets = (
 	);
 	Super = NSView;
-    };
-    WeatherWindow = {
-	Actions = (
-	);
-	Outlets = (
-	);
-	Super = NSWindow;
     };
 }

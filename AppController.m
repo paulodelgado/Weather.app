@@ -23,6 +23,7 @@ int currentLocationIndex = 0;
 - (id) init {
   if ((self = [super init]))
   {
+    [self prepareCachedWeatherData];
   }
   return self;
 }
@@ -32,9 +33,35 @@ int currentLocationIndex = 0;
 }
 
 - (void) awakeFromNib {
+  [self buildLoadingView];
+  [window setContentView:loadingView];
   currentLocationIndex = 0;
   [self setupWeatherApi];
-  [self fetchWeatherForCurrentIndex:nil];
+  [self fetchWeatherForAllLocations];
+  // [self setupMenu]
+}
+
+- (void) prepareCachedWeatherData {
+  cachedWeatherData = [[NSMutableArray alloc] init];
+}
+
+- (void) buildLoadingView {
+  loadingView = [[NSView alloc] initWithFrame:[[window contentView] frame]];
+  NSInteger progressIndicatorXCoord = ([window frame].size.width / 2) - 16;
+  NSInteger progressIndicatorYCoord = ([window frame].size.height / 2) - 16;
+  NSProgressIndicator *progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(progressIndicatorXCoord , progressIndicatorYCoord, 32, 32)];
+  [progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+  [progressIndicator setDisplayedWhenStopped:NO];
+  [progressIndicator setIndeterminate:YES];
+  [progressIndicator startAnimation:self];
+  [loadingView addSubview:progressIndicator];
+}
+
+- (void) setupWeatherApi {
+  api = [[GSMetNoWeather alloc] init];
+}
+
+- (void) setupMenu {
   ConfigManager *myManager = [ConfigManager defaultManager];
 
   NSMenu *menu = [locationsSubMenu submenu];
@@ -45,7 +72,7 @@ int currentLocationIndex = 0;
 
   int i;
   for(i = 0; i < [myManager locationCount] ; i++) {
-    NSString *locationName = [myManager locationAtIndex:i];
+    NSDictionary *locationDict = [myManager locationAtIndex:i];
     SEL mySelector = @selector(showLocationAtIndex:); 
     NSString *key;
     if(i < 9) {
@@ -53,34 +80,49 @@ int currentLocationIndex = 0;
     } else {
       key = @"";
     }
+    NSString *locationName = [locationDict valueForKey:@"name"];
     NSMenuItem *m = [[NSMenuItem alloc] initWithTitle:locationName action:mySelector keyEquivalent:key];
     [menu addItem:m];
   }
 }
 
-- (void) setupWeatherApi {
-  api = [[WeatherApi alloc] initWithToken:[[ConfigManager defaultManager] fetchAuthToken]];
+- (void) fetchWeatherForAllLocations {
+  ConfigManager *myManager = [ConfigManager defaultManager];
+  [cachedWeatherData removeAllObjects];
+  int i;
+  for(i = 0; i < [myManager locationCount] ; i++) {
+    NSDictionary *locationDict = [myManager locationAtIndex:i];
+    NSString *locationName = [locationDict valueForKey:@"name"];
+    double latitude  = [[locationDict valueForKey:@"latitude"] doubleValue];
+    double longitude = [[locationDict valueForKey:@"longitude"] doubleValue];
+
+    [api fetchWeatherDataForLatitude:latitude longitude:longitude compact:YES completionHandler:^(NSDictionary *data, NSError *error) {
+      if(error) {
+        NSLog(@"Error fetching weather data: %@", error);
+      } else {
+        LocationAndWeatherData *locationAndWeatherData = [[LocationAndWeatherData alloc] init];
+        [locationAndWeatherData setLocationName:locationName];
+        [locationAndWeatherData setWeatherData:data];
+        NSLog(@"Fetched weather data for %@", locationName);
+//        NSLog(@"Data: %@", data);
+        [cachedWeatherData addObject:locationAndWeatherData];
+        if(i == currentLocationIndex) {
+          [self displayWeatherForCurrentIndex:nil];
+        }
+      }
+    }];
+  }
 }
 
-- (void) fetchWeatherForCurrentIndex:(id) sender {  
-  NSString *savedLocationName = [[ConfigManager defaultManager] locationAtIndex:currentLocationIndex];
-  LocationWeatherData *lwd = [api fetchWeatherDataFor:savedLocationName];
+- (void) displayWeatherForCurrentIndex:(id) sender {
+  LocationAndWeatherData *locationAndWeatherData = [cachedWeatherData objectAtIndex:currentLocationIndex];
+  weatherView = [[WeatherView alloc] initWithFrame:[[window contentView] frame]];
+  [weatherView setLocationAndWeatherData:locationAndWeatherData];
+  [window setContentView:weatherView];
+}
 
-  [locationLabel setStringValue:[lwd locationName]];
-  [temperatureLabel setStringValue:[lwd temperature]];
-  [windSpeedLabel setStringValue:[lwd windSpeed]];
-  [precipitationLabel setStringValue:[lwd precipitation]];
-  [pressureLabel setStringValue:[lwd pressure]];
-  [humidityLabel setStringValue:[lwd humidity]];
-  [conditionLabel setStringValue:[lwd conditionText]];
-
-  NSString *timeOfDay = currentLocationIndex % 2 == 0 ? @"day" : @"night";
-  [weatherView setTimeOfDay:timeOfDay];
-  NSString *iconURLString = [lwd conditionIcon];
-  NSURL *iconURL = [NSURL URLWithString:iconURLString];
-  NSImage *newConditionIcon = [[NSImage alloc] initWithContentsOfURL: iconURL];
-  [imageView setImage:newConditionIcon];
-  [window display];
+- (void) resetView {
+  [window setContentView:loadingView];
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif {
@@ -112,7 +154,7 @@ int currentLocationIndex = 0;
     return;
   } else {
     currentLocationIndex++;
-    [self fetchWeatherForCurrentIndex:sender];
+    [self displayWeatherForCurrentIndex:sender];
   }
 }
 
@@ -121,13 +163,13 @@ int currentLocationIndex = 0;
     return;
   } else {
     currentLocationIndex--;
-    [self fetchWeatherForCurrentIndex:sender];
+    [self displayWeatherForCurrentIndex:sender];
   }
 }
 
 - (void) showLocationAtIndex:(id)sender {
   NSInteger index = [[sender keyEquivalent] integerValue] - 1;
   currentLocationIndex = index;
-  [self fetchWeatherForCurrentIndex:sender];
+  [self displayWeatherForCurrentIndex:sender];
 }
 @end

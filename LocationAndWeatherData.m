@@ -1,13 +1,11 @@
 /*
-   Project: GSNominatim
-
-   A wrapper to the Nominatim Geolocation web API
+   Project: Weather
 
    Copyright (C) 2023 Free Software Foundation
 
-   Author: Paulo Delgado
+   Author: Paulo Delgado,,,
 
-   Created: 2023-10-07 by Paulo Delgado
+   Created: 2023-10-10 21:24:44 -0700 by paulo
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -24,22 +22,30 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#import "WebServices/GWSService.h"
+#import "LocationAndWeatherData.h"
 
-#ifndef _GS_NOMINATIM_H_
-#define _GS_NOMINATIM_H_
+@implementation LocationAndWeatherData
 
-#import <Foundation/Foundation.h>
-#import "WebServices/GWSService.h"
-#import "WebServices/GWSCoder.h"
+@synthesize locationName;
+@synthesize weatherData;
 
-@interface GSNominatim : NSObject
-{
+- (NSString *) temperature {
+  return @"";
+}
+- (NSString *) conditionText {
+  return @"";
+}
+- (NSString *) windSpeed {
+  return @"";
+}
+- (NSString *) precipitation {
+  return @"";
+}
+- (NSString *) pressure {
+  return @"";
+}
+- (NSString *) humidity {
+  return @"";
 }
 
-- (NSString *) searchURL:(NSString *) query;
-- (void)fetchCoordinatesForLocation:(NSString *)locationQuery completionHandler:(void (^)(double latitude, double longitude, NSError *error))completionHandler;
-
 @end
-
-#endif // _GS_NOMINATIM_H_

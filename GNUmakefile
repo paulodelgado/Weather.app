@@ -31,7 +31,7 @@ Weather_APPLICATION_ICON = icon.png
 #
 # Libraries
 #
-Weather_LIBRARIES_DEPEND_UPON += -lWebServices 
+Weather_LIBRARIES_DEPEND_UPON += -lGSMetNoWeather -lGSNominatim
 
 #
 # Resource files
@@ -40,6 +40,7 @@ Weather_RESOURCE_FILES = \
 Resources/Weather.gorm \
 Resources/Preferences.gorm \
 Resources/LocationSearchWindow.gorm \
+Resources/WeatherView.gorm \
 Resources/weatherapi_logo.png \
 Resources/icon.png \
 Resources/icon.tiff \
@@ -51,34 +52,26 @@ Resources/loading.gif
 #
 Weather_HEADER_FILES = \
 AppController.h \
-LocationWeatherData.h \
-WeatherApi.h \
 ConfigManager.h \
 PreferencesController.h \
 WeatherView.h \
 WeatherGradients.h \
 WeatherIconImageView.h \
-WeatherWindow.h \
-GSNominatim.h \
-GSMetNoWeather.h \
-LocationSearchController.h
+LocationSearchController.h \
+LocationAndWeatherData.h
 
 #
 # Objective-C Class files
 #
 Weather_OBJC_FILES = \
 AppController.m \
-LocationWeatherData.m \
-WeatherApi.m \
 ConfigManager.m \
 PreferencesController.m \
 WeatherView.m \
 WeatherGradients.m \
 WeatherIconImageView.m \
-WeatherWindow.m \
-GSNominatim.m \
-GSMetNoWeather.m \
-LocationSearchController.m
+LocationSearchController.m \
+LocationAndWeatherData.m
 
 #
 # Other sources

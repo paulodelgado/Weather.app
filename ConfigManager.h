@@ -47,10 +47,10 @@
 - (NSString *) fetchAuthToken;
 - (BOOL) getUseMetricSystem;
 
-- (NSString *) locationAtIndex:(int) index;
+- (NSDictionary *) locationAtIndex:(int) index;
 - (int) locationCount;
 
-- (void) addLocation:(NSString *) newLocation;
+- (void) addLocation:(NSDictionary *) newLocation;
 - (void) removeLocationAt:(NSInteger) index;
 - (void) setLocationName:(id)name atIndex:(NSInteger) index;
 - (void) setUseMetricSystem:(BOOL) newValue;

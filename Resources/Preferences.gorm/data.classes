@@ -40,13 +40,6 @@
 	);
 	Super = NSObject;
     };
-    LocationWeatherData = {
-	Actions = (
-	);
-	Outlets = (
-	);
-	Super = NSObject;
-    };
     PreferencesController = {
 	Actions = (
 	    "setApiToken:",

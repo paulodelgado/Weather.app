@@ -46,7 +46,9 @@
 
 - (IBAction) addLocation:(id) sender {
   NSLog(@"preferencesConroller#addLocation");
-  locationSearchController = [[LocationSearchController alloc] initWithWindowNibName:@"LocationSearchWindow"];
+  if(!locationSearchController) {
+    locationSearchController = [[LocationSearchController alloc] initWithWindowNibName:@"LocationSearchWindow"];
+  }
   [locationSearchController showWindow:nil];
   /* [[ConfigManager defaultManager] addLocation:@""]; */
   /* [locationsTableView reloadData]; */
@@ -66,7 +68,7 @@
 
 - (id)tableView: (NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *) column
       row:(NSInteger) row {
-  return [[ConfigManager defaultManager] locationAtIndex:row];
+  return [[[ConfigManager defaultManager] locationAtIndex:row] valueForKey:@"name"];
 }
 
 - (void)tableView: (NSTableView *)tableView setObjectValue:(id) object

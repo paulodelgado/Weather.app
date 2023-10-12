@@ -14,16 +14,13 @@
     "CLASS_FILES" = (
 	"AppController.m",
 	"LocationWeatherData.m",
-	"WeatherApi.m",
 	"ConfigManager.m",
 	"PreferencesController.m",
 	"WeatherView.m",
 	"WeatherGradients.m",
 	"WeatherIconImageView.m",
-	"WeatherWindow.m",
-	"GSNominatim.m",
-	"GSMetNoWeather.m",
-	"LocationSearchController.m"
+	"LocationSearchController.m",
+	"WeatherData.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -34,17 +31,14 @@
     );
     "HEADER_FILES" = (
 	"AppController.h",
-	"LocationWeatherData.h",
-	"WeatherApi.h",
+	"LocationAndWeatherData.h",
 	"ConfigManager.h",
 	"PreferencesController.h",
 	"WeatherView.h",
 	"WeatherGradients.h",
 	"WeatherIconImageView.h",
-	"WeatherWindow.h",
-	"GSNominatim.h",
-	"GSMetNoWeather.h",
-	"LocationSearchController.h"
+	"LocationSearchController.h",
+	"LocationAndWeatherData.h"
     );
     IMAGES = (
 	"weatherapi_logo.png",
@@ -62,7 +56,7 @@
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
-	WebServices
+	GSMetNoWeather
     );
     LINKEROPTIONS = "";
     "LOCALIZED_RESOURCES" = (
@@ -95,7 +89,8 @@
     "SEARCH_HEADER_DIRS" = (
     );
     "SEARCH_LIB_DIRS" = (
-	"/usr/local/lib"
+	"/usr/local/lib",
+	"/Library/Libraries"
     );
     SUBPROJECTS = (
     );

@@ -66,10 +66,14 @@ static ConfigManager *defaultManager;
 }
 
 - (NSMutableDictionary *) buildDefaultConfig {
-  id locs[] = {@"Cupertino, CA", @"New York, NY"};
-  NSArray *locations = [NSArray arrayWithObjects:locs count:2];
+  NSDictionary *cupertinoInfo = @{@"latitude": @(37.3228934),
+    @"longitude": @(-122.0322895),
+    @"displayName": @"Cupertino, Santa Clara County, California, 95014, United States",
+    @"name": @"Cupertino"};
+  id locs[] = {cupertinoInfo};
+  NSArray *locations = [NSArray arrayWithObjects:locs count:1];
   NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-    locations, @"locations", @"", @"api_key", @"false", @"use_metric_system", nil];
+    locations, @"locations", @"false", @"use_metric_system", nil];
   return newDict;
 }
 
@@ -115,7 +119,7 @@ static ConfigManager *defaultManager;
   [locationsArr retain];
 }
 
-- (NSString *) locationAtIndex:(int) index {
+- (NSDictionary *) locationAtIndex:(int) index {
   return [locationsArr objectAtIndex:index];
 }
 
@@ -132,7 +136,7 @@ static ConfigManager *defaultManager;
   [configDictionary writeToFile:[self defaultConfigFilePath] atomically:true];
 }
 
-- (void) addLocation:(NSString *) newLocation {
+- (void) addLocation:(NSDictionary *) newLocation {
   [locationsArr addObject:newLocation];
 }
 

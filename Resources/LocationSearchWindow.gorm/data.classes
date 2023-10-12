@@ -1,9 +1,46 @@
 {
     "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "showNextLocation:",
+	    "showPreviousLocation:",
+	    "fetchWeatherForCurrentIndex:",
+	    "showLocationAtIndex:"
+	);
+	Outlets = (
+	    temperatureLabel,
+	    locationLabel,
+	    windSpeedLabel,
+	    precipitationLabel,
+	    pressureLabel,
+	    humidityLabel,
+	    imageView,
+	    conditionLabel,
+	    weatherView,
+	    window,
+	    locationsSubMenu,
+	    nextLocationButton,
+	    previousLocationButton
+	);
+	Super = NSObject;
+    };
+    ConfigManager = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
     FirstResponder = {
 	Actions = (
 	    "closeWindow:",
+	    "fetchWeatherForCurrentIndex:",
 	    "saveLocationData:",
+	    "showLocationAtIndex:",
+	    "showNextLocation:",
+	    "showPrefPanel:",
+	    "showPreviousLocation:",
 	    "startSearch:"
 	);
 	Super = NSObject;
@@ -16,8 +53,10 @@
 	);
 	Outlets = (
 	    validLocationIndicator,
+	    locationQueryTextField,
 	    addLocationButton,
-	    startSearchButton
+	    startSearchButton,
+	    searchResultsTableView
 	);
 	Super = NSWindowController;
     };

@@ -1,14 +1,13 @@
 /* All rights reserved */
 
 #include <AppKit/AppKit.h>
+#import "LocationAndWeatherData.h"
 #import "WeatherGradients.h"
 
 @interface WeatherView : NSView
 {
-  NSString *timeOfDay;
 }
 
-
-@property (nonatomic, retain) NSString *timeOfDay;
+@property (nonatomic, retain) LocationAndWeatherData *locationAndWeatherData;
 
 @end

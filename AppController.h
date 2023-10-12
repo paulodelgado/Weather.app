@@ -10,8 +10,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import "LocationWeatherData.h"
-#import "WeatherApi.h"
+#import <GSMetNoWeather/GSMetNoWeather.h>
+#import "LocationAndWeatherData.h"
 #import "ConfigManager.h"
 #import "PreferencesController.h"
 #import "WeatherView.h"
@@ -33,11 +33,13 @@
   id nextLocationButton;
   id previousLocationButton;
 
-  WeatherApi *api;
   PreferencesController *preferencesController;
   NSImage *conditionIcon;
-  
+
   int currentLocationIndex;
+  GSMetNoWeather *api;
+  NSMutableArray *cachedWeatherData;
+  NSView *loadingView;
 }
 
 + (void)  initialize;
@@ -45,6 +47,7 @@
 - (id) init;
 - (void) dealloc;
 - (void) awakeFromNib;
+- (void) prepareCachedWeatherData;
 - (void) applicationDidFinishLaunching: (NSNotification *)aNotif;
 - (BOOL) applicationShouldTerminate: (id)sender;
 - (void) applicationWillTerminate: (NSNotification *)aNotif;
@@ -53,7 +56,8 @@
 - (void) showNextLocation: (id)sender;
 - (void) showPreviousLocation: (id)sender;
 - (void) setupWeatherApi;
-- (void) fetchWeatherForCurrentIndex:(id) sender;
+- (void) fetchWeatherForAllLocations;
+- (void) resetView;
 - (void) showLocationAtIndex:(id)sender;
 
 @end

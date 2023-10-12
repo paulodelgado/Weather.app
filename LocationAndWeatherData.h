@@ -3,9 +3,9 @@
 
    Copyright (C) 2023 Free Software Foundation
 
-   Author: Paulo Delgado
+   Author: Paulo Delgado,,,
 
-   Created: 2023-09-07 11:46:26 -0700 by paulo
+   Created: 2023-10-10 21:24:44 -0700 by paulo
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,14 +22,29 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#import "WeatherGradients.h"
+#ifndef _LOCATION_AND_WEATHERDATA_H_
+#define _LOCATION_AND_WEATHERDATA_H_
 
-@implementation WeatherGradients
-+ (NSGradient *) defaultGradient {
-  return [[self alloc] initWithStartingColor:[NSColor yellowColor] endingColor:[NSColor orangeColor]];
+#import <Foundation/Foundation.h>
+
+@interface LocationAndWeatherData : NSObject
+{
 }
 
-+ (NSGradient *) nightGradient {
-  return [[self alloc] initWithStartingColor:[NSColor blackColor] endingColor:[NSColor blueColor]];
-}
+@property (nonatomic, strong) NSString *locationName;
+@property (nonatomic, strong) NSDictionary *weatherData;
+
+- (NSString *) temperature;
+- (NSString *) locationName;
+- (NSString *) conditionText;
+- (NSString *) windSpeed;
+- (NSString *) precipitation;
+- (NSString *) pressure;
+- (NSString *) humidity;
+
+
+
 @end
+
+#endif // _LOCATION_AND_WEATHERDATA_H_
+
