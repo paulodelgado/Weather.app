@@ -31,7 +31,7 @@ Weather_APPLICATION_ICON = icon.png
 #
 # Libraries
 #
-Weather_LIBRARIES_DEPEND_UPON += -lGSMetNoWeather -lGSNominatim
+Weather_LIBRARIES_DEPEND_UPON += -lGSMetNoWeather -lGSNominatim 
 
 #
 # Resource files

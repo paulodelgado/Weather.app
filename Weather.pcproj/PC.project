@@ -13,14 +13,13 @@
     "BUNDLE_IDENTIFIER" = "";
     "CLASS_FILES" = (
 	"AppController.m",
-	"LocationWeatherData.m",
 	"ConfigManager.m",
 	"PreferencesController.m",
 	"WeatherView.m",
 	"WeatherGradients.m",
 	"WeatherIconImageView.m",
 	"LocationSearchController.m",
-	"WeatherData.m"
+	"LocationAndWeatherData.m"
     );
     COMPILEROPTIONS = "";
     CPPOPTIONS = "";
@@ -31,7 +30,6 @@
     );
     "HEADER_FILES" = (
 	"AppController.h",
-	"LocationAndWeatherData.h",
 	"ConfigManager.h",
 	"PreferencesController.h",
 	"WeatherView.h",
@@ -50,13 +48,15 @@
     INTERFACES = (
 	"Weather.gorm",
 	"Preferences.gorm",
-	"LocationSearchWindow.gorm"
+	"LocationSearchWindow.gorm",
+	"WeatherView.gorm"
     );
     LANGUAGE = English;
     LIBRARIES = (
 	"gnustep-base",
 	"gnustep-gui",
-	GSMetNoWeather
+	GSMetNoWeather,
+	GSNominatim
     );
     LINKEROPTIONS = "";
     "LOCALIZED_RESOURCES" = (
