@@ -14,23 +14,8 @@ This is a small weather app written in ObjectiveC and using the GNUStep framewor
 * Run `sudo make install` for a system-wide installation or `make install` to install for just your user.
 
 # Usage
-Run the app from the repo directory.   It won't work the first time, so quit it.
 
-You will need to manually edit the generated file in `~/.config/Weather.app/config.plist` to include your WeatherApi.com token. 
-
-The token is free once you sign up for a free plan with WeatherAPI.com.  Yes, this is annoying but I don't know (really haven't researched) any other Weather APIs that are free to use.
-
-My config file looks as follows:
-```
-{
-    "api_key" = "your api token goes here";
-    locations = (
-        "Cupertino, CA",
-        "New York, NY"
-    );
-    "use_metric_system" = "false";
-}
-```
+TODO
 
 # Known Bugs
 * The "current location icon" doesn't update/change when you switch between locations/cities.
