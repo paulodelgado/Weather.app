@@ -63,6 +63,8 @@
     );
     MAININTERFACE = "Weather.gorm";
     MAKEFILEDIR = "$(GNUSTEP_MAKEFILES)";
+    "NON_PROJECT_FILES" = (
+    );
     "OBJC_COMPILEROPTIONS" = "";
     "OTHER_RESOURCES" = (
     );

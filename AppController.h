@@ -14,6 +14,7 @@
 #import "LocationAndWeatherData.h"
 #import "ConfigManager.h"
 #import "PreferencesController.h"
+#import "WeatherViewController.h"
 #import "WeatherView.h"
 
 
@@ -26,7 +27,6 @@
   id humidityLabel;
   id imageView;
   id conditionLabel;
-  id weatherView;
   id window;
   id locationsSubMenu;
 
@@ -40,6 +40,7 @@
   GSMetNoWeather *api;
   NSMutableArray *cachedWeatherData;
   NSView *loadingView;
+  BOOL weatherDataIsLoaded;
 }
 
 + (void)  initialize;
@@ -62,4 +63,4 @@
 
 @end
 
-#endif
+#endif // _PCAPPPROJ_APPCONTROLLER_H

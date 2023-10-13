@@ -1,10 +1,61 @@
 {
     "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "showNextLocation:",
+	    "showPreviousLocation:",
+	    "showLocationAtIndex:"
+	);
+	Outlets = (
+	    temperatureLabel,
+	    locationLabel,
+	    windSpeedLabel,
+	    precipitationLabel,
+	    pressureLabel,
+	    humidityLabel,
+	    imageView,
+	    conditionLabel,
+	    weatherView,
+	    window,
+	    locationsSubMenu,
+	    nextLocationButton,
+	    previousLocationButton
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "showLocationAtIndex:",
+	    "showNextLocation:",
+	    "showPrefPanel:",
+	    "showPreviousLocation:"
+	);
+	Super = NSObject;
+    };
     WeatherView = {
 	Actions = (
 	);
 	Outlets = (
+	    temperatureField,
+	    locationField,
+	    pressureField,
+	    humidityField,
+	    windSpeedField
 	);
 	Super = NSView;
+    };
+    WeatherViewController = {
+	Actions = (
+	);
+	Outlets = (
+	    temperatureField,
+	    locationField,
+	    pressureField,
+	    humidityField,
+	    windSpeedField,
+	    weatherView
+	);
+	Super = NSViewController;
     };
 }

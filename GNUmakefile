@@ -58,7 +58,8 @@ WeatherView.h \
 WeatherGradients.h \
 WeatherIconImageView.h \
 LocationSearchController.h \
-LocationAndWeatherData.h
+LocationAndWeatherData.h \
+WeatherViewController.h
 
 #
 # Objective-C Class files
@@ -71,7 +72,8 @@ WeatherView.m \
 WeatherGradients.m \
 WeatherIconImageView.m \
 LocationSearchController.m \
-LocationAndWeatherData.m
+LocationAndWeatherData.m \
+WeatherViewController.m
 
 #
 # Other sources

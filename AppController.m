@@ -33,6 +33,7 @@ int currentLocationIndex = 0;
 }
 
 - (void) awakeFromNib {
+  weatherDataIsLoaded = NO;
   [self buildLoadingView];
   [window setContentView:loadingView];
   currentLocationIndex = 0;
@@ -43,6 +44,7 @@ int currentLocationIndex = 0;
 
 - (void) prepareCachedWeatherData {
   cachedWeatherData = [[NSMutableArray alloc] init];
+  [cachedWeatherData retain];
 }
 
 - (void) buildLoadingView {
@@ -101,13 +103,16 @@ int currentLocationIndex = 0;
         NSLog(@"Error fetching weather data: %@", error);
       } else {
         LocationAndWeatherData *locationAndWeatherData = [[LocationAndWeatherData alloc] init];
+        [locationAndWeatherData retain];
         [locationAndWeatherData setLocationName:locationName];
         [locationAndWeatherData setWeatherData:data];
         NSLog(@"Fetched weather data for %@", locationName);
-//        NSLog(@"Data: %@", data);
         [cachedWeatherData addObject:locationAndWeatherData];
-        if(i == currentLocationIndex) {
-          [self displayWeatherForCurrentIndex:nil];
+
+        // Now lets notify the main thread that we can display the weather for the first location
+        if([cachedWeatherData count] == [myManager locationCount] && !weatherDataIsLoaded) {
+          weatherDataIsLoaded = YES;
+          [self performSelectorOnMainThread:@selector(displayWeatherForCurrentIndex:) withObject:nil waitUntilDone:NO];
         }
       }
     }];
@@ -115,10 +120,19 @@ int currentLocationIndex = 0;
 }
 
 - (void) displayWeatherForCurrentIndex:(id) sender {
-  LocationAndWeatherData *locationAndWeatherData = [cachedWeatherData objectAtIndex:currentLocationIndex];
-  weatherView = [[WeatherView alloc] initWithFrame:[[window contentView] frame]];
-  [weatherView setLocationAndWeatherData:locationAndWeatherData];
-  [window setContentView:weatherView];
+  LocationAndWeatherData *currentLocationAndWeatherData = [cachedWeatherData objectAtIndex:currentLocationIndex];
+  [window setTitle:[NSString stringWithFormat:@"Weather - %@", [currentLocationAndWeatherData valueForKey:@"locationName"]]];
+  WeatherViewController *weatherViewController = [[WeatherViewController alloc] init];
+  [weatherViewController setLocationAndWeatherData:currentLocationAndWeatherData];
+
+  NSLog(@"about to display weather for %@", [currentLocationAndWeatherData valueForKey:@"locationName"]);
+  [window setContentView:weatherViewController.view];
+  NSLog(@"displayed weather for %@", [currentLocationAndWeatherData valueForKey:@"locationName"]);
+
+  NSLog(@"gonna debug here");
+
+  // lets force redraw the window
+  [window display];
 }
 
 - (void) resetView {

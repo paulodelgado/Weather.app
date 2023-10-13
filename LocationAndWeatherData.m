@@ -29,8 +29,14 @@
 @synthesize locationName;
 @synthesize weatherData;
 
+- (NSArray *) timeSeries {
+  return weatherData[@"properties"][@"timeseries"];
+}
+
 - (NSString *) temperature {
-  return @"";
+  NSString *temp = [[self timeSeries]  firstObject][@"data"][@"instant"][@"details"][@"air_temperature"];
+  NSLog(@"fetching temperature: %@", temp);
+  return temp;
 }
 - (NSString *) conditionText {
   return @"";
